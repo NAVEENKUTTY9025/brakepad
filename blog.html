@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Blog | BrakeMaster - Mobile Brake Repair Tips & Advice</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
+  <meta name="description" content="Expert blog on mobile brake repair, rotor replacement, maintenance tips, and vehicle safety. Learn from BrakeMaster professionals.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base - Three Color System: Black, White, #FFD428 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F5F5F5;
+      --bg-card: #FFFFFF;
+      --bg-nav: #000000;
+      --text-primary: #000000;
+      --text-secondary: #333333;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #000000;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-nav: #000000;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #000000;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Utility Classes */
+    .text-accent {
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000000;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #E0B800;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255,212,40,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #000000;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(0, 0, 0, 0.85); /* Glassmorphism */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: fixed;
+      width: calc(100% - 40px);
+      top: 15px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .flex-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo-text {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--nav-text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span {
+      color: var(--accent);
+    }
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin: 0 2rem;
+    }
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--nav-text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+      position: relative;
+    }
+    .dropdown-btn::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute;
+      left: -1rem;
+      margin-top: 1rem;
+      width: 220px;
+      background: rgba(17, 17, 17, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      transform: translateY(10px);
+      z-index: 60;
+      border: 1px solid rgba(255,212,40,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(255,212,40,0.1); color: var(--accent); }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #000000; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn {
+      background: var(--accent);
+      color: #000000;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(255,212,40,0.2);
+    }
+    .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    
+    @media (max-width: 1180px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+    .hamburger-icon, .close-icon {
+      font-size: 1.8rem;
+      color: var(--nav-text);
+    }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+    
+    .mobile-menu-panel {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-nav);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-nav-link {
+      color: var(--nav-text);
+      text-decoration: none;
+      display: block;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(255,212,40,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.3);
+    }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a {
+      display: block;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    .mobile-submenu a:hover { color: var(--accent); opacity: 1; }
+    .mobile-login-btn {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: var(--accent);
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-theme-rtl {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(255,212,40,0.15);
+      flex-wrap: wrap;
+    }
+    .mobile-icon-btn {
+      background: rgba(255,212,40,0.15);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: var(--nav-text);
+      cursor: pointer;
+    }
+    .mobile-icon-btn:hover { background: var(--accent); color: #000000; }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      padding: 160px 0 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-header h1 {
+      font-size: 3.5rem;
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Blog Layout */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    section {
+      padding: 80px 0;
+    }
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+    }
+    .accent-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem 0 2rem;
+    }
+
+    /* Blog Cards */
+    .blog-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+    .blog-img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+    .blog-content {
+      padding: 1.8rem;
+    }
+    .blog-meta {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .blog-meta i {
+      color: var(--accent);
+      margin-right: 0.3rem;
+    }
+    .blog-content h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+    .blog-content h2 a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s;
+    }
+    .blog-content h2 a:hover {
+      color: var(--accent);
+    }
+    .blog-excerpt {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .read-more {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s;
+    }
+    .read-more:hover {
+      gap: 12px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .sidebar-widget h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+    .search-box button {
+      background: var(--accent);
+      border: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #000000;
+    }
+    .category-list {
+      list-style: none;
+    }
+    .category-list li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .category-list li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      transition: color 0.3s;
+    }
+    .category-list li a:hover {
+      color: var(--accent);
+    }
+    .recent-post {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .recent-post img {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .recent-post-info h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+    .recent-post-info h4 a {
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+    .recent-post-info h4 a:hover {
+      color: var(--accent);
+    }
+    .recent-post-info span {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .newsletter p {
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    .newsletter input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 0.8rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    /* Featured Post */
+    .featured-post {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      border: 1px solid var(--border-color);
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .featured-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 320px;
+    }
+    .featured-content {
+      padding: 2.5rem;
+    }
+    .featured-badge {
+      background: var(--accent);
+      color: #000000;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .featured-content h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .pagination a {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: all 0.3s;
+    }
+    .pagination a:hover, .pagination a.active {
+      background: var(--accent);
+      color: #000000;
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 1024px) {
+      .blog-layout { grid-template-columns: 1fr; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .page-header h1 { font-size: 2.5rem; }
+    }
+    @media (max-width: 768px) {
+      .blog-content h2 { font-size: 1.3rem; }
+      .featured-content h2 { font-size: 1.4rem; }
+      .featured-content { padding: 1.5rem; }
+    }
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      padding-top: 80px;
+      padding-bottom: 40px;
+      border-top: 1px solid rgba(255,212,40,0.2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--footer-text);
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo {
+       font-size: 1.6rem!important;
+      font-weight: 700 !important;
+      color: var(--footer-text) !important;
+      text-decoration: none !important;
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: var(--footer-text-muted);
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-copyright {
+      border-top: 1px solid rgba(255,212,40,0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--footer-text-muted);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+     <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link active">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link active">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header" style="
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
+  url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  padding: 120px 20px;
+  text-align: center;
+  overflow: hidden;
+">
+
+  <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: auto;">
+    
+    <h1 style="
+      font-size: 3.2rem;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    ">
+      BrakeMaster <span class="text-accent" style="color:#FFD428;">Blog</span>
+    </h1>
+
+    <div class="accent-divider" style="
+      width: 90px;
+      height: 4px;
+      background: #FFD428;
+      margin: 18px auto 25px;
+      border-radius: 10px;
+    "></div>
+
+    <p style="
+      color: rgba(255,255,255,0.92);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 720px;
+      margin: auto;
+    ">
+      Expert advice, maintenance tips, and industry insights from our brake repair specialists.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MAIN BLOG CONTENT -->
+<section>
+  <div class="container">
+    <div class="blog-layout">
+      <!-- Main Content -->
+      <div>
+        <!-- Featured Post -->
+        <div class="featured-post">
+          <div class="featured-grid">
+            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&auto=format" alt="Featured brake repair guide" class="featured-img">
+            <div class="featured-content">
+              <span class="featured-badge"><i class="fas fa-star"></i> FEATURED</span>
+              <h2>Complete Guide to Brake Pad Replacement: When, Why & How</h2>
+              <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 15, 2026</span><span><i class="fas fa-clock"></i> 8 min read</span></div>
+              <p class="blog-excerpt">Learn everything about brake pad replacement — from signs of wear to choosing the right pads. Our comprehensive guide helps you make informed decisions about your vehicle's safety.</p>
+              <a href="#" class="read-more">Read Full Article <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Post 1 -->
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format" alt="Signs of brake rotor wear" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 10, 2026</span><span><i class="fas fa-tag"></i> Maintenance</span></div>
+            <h2><a href="#">5 Signs Your Rotors Need Replacement Immediately</a></h2>
+            <p class="blog-excerpt">Vibrations when braking? Squealing noises? Don't ignore these warning signs. Learn to identify when your rotors are worn and why timely replacement matters for safety.</p>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Blog Post 2 -->
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1622445275576-721325763c22?w=800&auto=format" alt="Mobile brake repair benefits" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 5, 2026</span><span><i class="fas fa-tag"></i> Mobile Service</span></div>
+            <h2><a href="#">Why Mobile Brake Repair is Better Than the Dealership</a></h2>
+            <p class="blog-excerpt">Save time and money with mobile brake service. Compare convenience, pricing, and quality between traditional shops and our on-site repair solution.</p>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Blog Post 3 -->
+        <div class="blog-card">
+          <img src="images/b1.webp" alt="Brake fluid maintenance" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 28, 2026</span><span><i class="fas fa-tag"></i> Safety</span></div>
+            <h2><a href="#">The Importance of Regular Brake Fluid Flushes</a></h2>
+            <p class="blog-excerpt">Moisture contamination can destroy your brake system from inside. Discover why brake fluid flushes every 2 years are crucial for maintaining stopping power.</p>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Blog Post 4 -->
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&auto=format" alt="Seasonal brake care" class="blog-img">
+          <div class="blog-content">
+            <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 20, 2026</span><span><i class="fas fa-tag"></i> Seasonal Tips</span></div>
+            <h2><a href="#">Winter vs Summer: How Seasons Affect Your Brakes</a></h2>
+            <p class="blog-excerpt">Extreme temperatures impact brake performance. Learn seasonal maintenance tips to keep your brakes in top condition year-round.</p>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+          <a href="#" class="active">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#"><i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Search Widget -->
+        <div class="sidebar-widget">
+          <h3>Search</h3>
+          <div class="search-box">
+            <input type="text" placeholder="Search articles...">
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="sidebar-widget">
+          <h3>Categories</h3>
+          <ul class="category-list">
+            <li><a href="#">Brake Maintenance <span>(12)</span></a></li>
+            <li><a href="#">Rotor Replacement <span>(8)</span></a></li>
+            <li><a href="#">Mobile Service Tips <span>(6)</span></a></li>
+            <li><a href="#">Safety Guides <span>(10)</span></a></li>
+            <li><a href="#">DIY & Troubleshooting <span>(5)</span></a></li>
+            <li><a href="#">Industry News <span>(4)</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Recent Posts -->
+        <div class="sidebar-widget">
+          <h3>Recent Posts</h3>
+          <div class="recent-post">
+            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=150&auto=format" alt="Recent post">
+            <div class="recent-post-info">
+              <h4><a href="#">How to Choose Between Ceramic and Semi-Metallic Brake Pads</a></h4>
+              <span><i class="fas fa-calendar"></i> March 12, 2026</span>
+            </div>
+          </div>
+          <div class="recent-post">
+            <img src="https://images.unsplash.com/photo-1622445275576-721325763c22?w=150&auto=format" alt="Recent post">
+            <div class="recent-post-info">
+              <h4><a href="#">10 Questions to Ask Before Hiring a Mobile Brake Service</a></h4>
+              <span><i class="fas fa-calendar"></i> March 8, 2026</span>
+            </div>
+          </div>
+          <div class="recent-post">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=150&auto=format" alt="Recent post">
+            <div class="recent-post-info">
+              <h4><a href="#">Understanding Brake Noise: Squeaks, Grinds & Scrapes Explained</a></h4>
+              <span><i class="fas fa-calendar"></i> March 1, 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="sidebar-widget">
+          <h3>Newsletter</h3>
+          <div class="newsletter">
+            <p>Get the latest brake maintenance tips and exclusive offers delivered to your inbox.</p>
+            <input type="email" placeholder="Your email address">
+            <button class="btn-primary" style="width: 100%; justify-content: center;">Subscribe</button>
+          </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="sidebar-widget" style="background: var(--accent); color: #000000; text-align: center;">
+          <i class="fas fa-phone-alt" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+          <h3 style="color: #000000;">Need Brake Help?</h3>
+          <p style="color: #000000;">Call our experts 24/7</p>
+          <a href="tel:+18885552753" style="font-size: 1.5rem; font-weight: 700; color: #000000; text-decoration: none;">(888) 555-2753</a>
+          <a href="contact.html" class="btn-outline" style="margin-top: 1rem; display: inline-block; background: #000000; color: var(--accent); border-color: #000000;">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if(body.classList.contains('dark')) { body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false); }
+    else { body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true); }
+  }
+  if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+  
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() { if(htmlEl.getAttribute('dir') === 'rtl') { htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr'); } else { htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl'); } }
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if(localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+  
+  // Mobile Menu
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() { mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active'); document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : ''; }
+  if(mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => { link.addEventListener('click', () => { if(mobilePanel.classList.contains('show')) toggleMobile(); }); });
+  
+  // Mobile Dropdowns
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if(menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if(i !== icon) i.classList.remove('rotated'); });
+      if(submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+  
+  window.addEventListener('resize', () => { if(window.innerWidth > 1180 && mobilePanel?.classList.contains('show')) toggleMobile(); });
+</script>
+</body>
+</html>

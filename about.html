@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>About Us | BrakeMaster - Mobile Brake Repair & Rotor Replacement</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
+  <meta name="description" content="Learn about BrakeMaster - the leading mobile brake repair and rotor replacement service. Our story, mission, certified team, and commitment to excellence.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base - Three Color System: Black, White, #FFD428 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F5F5F5;
+      --bg-card: #FFFFFF;
+      --bg-nav: #000000;
+      --text-primary: #000000;
+      --text-secondary: #333333;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #000000;
+    }
+
+    /* Dark mode - pure black/white/gold */
+    body.dark {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-nav: #000000;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #000000;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Utility Classes */
+    .text-accent {
+      color: var(--accent);
+    }
+    .bg-accent {
+      background: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000000;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #E0B800;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255,212,40,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #000000;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(0, 0, 0, 0.85); /* Glassmorphism */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: fixed;
+      width: calc(100% - 40px);
+      top: 15px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .flex-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo-text {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--nav-text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span {
+      color: var(--accent);
+    }
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin: 0 2rem;
+    }
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--nav-text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+      position: relative;
+    }
+    .dropdown-btn::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute;
+      left: -1rem;
+      margin-top: 1rem;
+      width: 220px;
+      background: rgba(17, 17, 17, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      transform: translateY(10px);
+      z-index: 60;
+      border: 1px solid rgba(255,212,40,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(255,212,40,0.1); color: var(--accent); }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #000000; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn {
+      background: var(--accent);
+      color: #000000;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(255,212,40,0.2);
+    }
+    .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    
+    @media (max-width: 1180px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+    .hamburger-icon, .close-icon {
+      font-size: 1.8rem;
+      color: var(--nav-text);
+    }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+    
+    .mobile-menu-panel {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-nav);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-nav-link {
+      color: var(--nav-text);
+      text-decoration: none;
+      display: block;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(255,212,40,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.3);
+    }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a {
+      display: block;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    .mobile-submenu a:hover { color: var(--accent); opacity: 1; }
+    .mobile-login-btn {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: var(--accent);
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-theme-rtl {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(255,212,40,0.15);
+      flex-wrap: wrap;
+    }
+    .mobile-icon-btn {
+      background: rgba(255,212,40,0.15);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: var(--nav-text);
+      cursor: pointer;
+    }
+    .mobile-icon-btn:hover { background: var(--accent); color: #000000; }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      padding: 160px 0 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-header h1 {
+      font-size: 3.5rem;
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Section Styles */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .section-title {
+      font-size: 2.8rem;
+      font-family: 'Oswald', sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+    .accent-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem auto 2rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 2rem;
+      border-radius: 20px;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    .info-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .info-card i {
+      font-size: 2.8rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .info-card h3 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.8rem;
+    }
+    .rounded-img {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-family: 'Oswald', sans-serif;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .team-member {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: 0.3s;
+    }
+    .team-member:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
+    .team-member img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+    .team-info {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .team-info h3 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.3rem;
+    }
+    .team-info p {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+      .grid-4, .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 768px) {
+      .grid-4, .stats-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+      .page-header h1 { font-size: 2.5rem; }
+    }
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      padding-top: 80px;
+      padding-bottom: 40px;
+      border-top: 1px solid rgba(255,212,40,0.2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--footer-text);
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--footer-text) !important;
+      text-decoration: none !important;
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: var(--footer-text-muted);
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-copyright {
+      border-top: 1px solid rgba(255,212,40,0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--footer-text-muted);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+     <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link active">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="faq.html" class="nav-link">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link active">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header" style="
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
+  url('https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  padding: 120px 20px;
+  text-align: center;
+  overflow: hidden;
+">
+
+  <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: auto;">
+    <h1 style="
+      font-size: 3.2rem;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    ">
+      About <span class="text-accent" style="color:#FFD428;">BrakeMaster</span>
+    </h1>
+
+    <div class="accent-divider" style="
+      width: 90px;
+      height: 4px;
+      background: #FFD428;
+      margin: 18px auto 25px;
+      border-radius: 10px;
+    "></div>
+
+    <p style="
+      color: rgba(255,255,255,0.92);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 700px;
+      margin: auto;
+    ">
+      Pioneering mobile brake repair since 2015. Our mission is to deliver professional, convenient, and affordable brake services right to your doorstep.
+    </p>
+  </div>
+
+</div>
+
+<!-- SECTION 1: Our Story + HD Image -->
+<section>
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <h2 class="font-heading" style="font-size: 2.5rem; margin-bottom: 1rem;">Our <span class="text-accent">Journey</span></h2>
+        <div style="width: 70px; height: 3px; background: var(--accent); margin-bottom: 1.5rem;"></div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">What started as a single mobile van in downtown Chicago has grown into a nationwide network of certified brake specialists. We saw a gap in the market — drivers needed quality brake repair without the hassle of towing or dealership wait times.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Today, BrakeMaster completes over 15,000 brake repairs annually, maintaining a 4.9-star rating from satisfied customers. Our mobile-first approach saves you time and money, with transparent pricing and premium parts.</p>
+        <a href="service.html" class="btn-primary" style="margin-top: 0.5rem;"><i class="fas fa-wrench"></i> Explore Services</a>
+      </div>
+      <div>
+        <img src="images/ab 1.webp" alt="BrakeMaster mobile service van and technician" class="rounded-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: Core Values (Stats + Icons) -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Our <span class="text-accent">Core Values</span></h2>
+    <div class="accent-divider"></div>
+    <div class="grid-4">
+      <div class="info-card"><i class="fas fa-shield-alt"></i><h3>Safety First</h3><p>Every repair meets strict safety standards. Your family's safety is our priority.</p></div>
+      <div class="info-card"><i class="fas fa-clock"></i><h3>Punctuality</h3><p>We arrive on time, every time. Same-day service available 7 days a week.</p></div>
+      <div class="info-card"><i class="fas fa-dollar-sign"></i><h3>Fair Pricing</h3><p>Upfront quotes with no hidden fees. Save 30-50% vs dealerships.</p></div>
+      <div class="info-card"><i class="fas fa-leaf"></i><h3>Eco-Conscious</h3><p>Recycled materials, responsible disposal of old parts.</p></div>
+    </div>
+    <div class="stats-grid" style="margin-top: 3rem;">
+      <div><div class="stat-number">15K+</div><p>Brake Repairs</p></div>
+      <div><div class="stat-number">4.9★</div><p>Customer Rating</p></div>
+      <div><div class="stat-number">50+</div><p>Mobile Vans</p></div>
+      <div><div class="stat-number">24/7</div><p>Support</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: Our Process + HD Image -->
+<section>
+  <div class="container">
+    <div class="grid-2">
+      <div><img src="images/ab2.webp" alt="Mechanic inspecting brake rotor" class="rounded-img"></div>
+      <div>
+        <h2 class="font-heading" style="font-size: 2.5rem; margin-bottom: 1rem;">Our <span class="text-accent">Process</span></h2>
+        <div style="width: 70px; height: 3px; background: var(--accent); margin-bottom: 1.5rem;"></div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">We've streamlined mobile brake repair to be effortless for you. Book online or call, choose your location, and our certified technician arrives fully equipped. We perform a complete brake inspection, share digital estimates, and only start work after your approval.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">All parts come with a 12-month/12,000-mile warranty. We test-drive your vehicle and provide a detailed service report before leaving. Simple, transparent, professional.</p>
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem;"><span class="text-accent"><i class="fas fa-check-circle"></i> Free Inspection</span><span class="text-accent"><i class="fas fa-check-circle"></i> Digital Invoice</span><span class="text-accent"><i class="fas fa-check-circle"></i> Warranty Included</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: Meet Our Certified Technicians (Team) -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Meet Our <span class="text-accent">Experts</span></h2>
+    <div class="accent-divider"></div>
+    <p class="section-sub">ASE-certified technicians with years of experience in brake systems. Passionate about quality service.</p>
+    <div class="grid-3">
+      <div class="team-member"><img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&auto=format" alt="Senior technician"><div class="team-info"><h3>Mike Reynolds</h3><p>Lead Technician</p><p style="color: var(--text-muted); font-size:0.8rem; margin-top:5px;">ASE Master Certified | 12+ years</p></div></div>
+      <div class="team-member"><img src="images/ab3.webp" alt="Female technician"><div class="team-info"><h3>Jessica Chen</h3><p>Brake Specialist</p><p style="color: var(--text-muted); font-size:0.8rem; margin-top:5px;">Certified | 8+ years</p></div></div>
+      <div class="team-member"><img src="images/ab4.webp" alt="Technician working"><div class="team-info"><h3>David Ortiz</h3><p>Mobile Operations</p><p style="color: var(--text-muted); font-size:0.8rem; margin-top:5px;">ASE Certified | 10+ years</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: Technology & Equipment (HD Image + Icons) -->
+<section>
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <h2 class="font-heading" style="font-size: 2.5rem; margin-bottom: 1rem;">State-of-the-Art <span class="text-accent">Equipment</span></h2>
+        <div style="width: 70px; height: 3px; background: var(--accent); margin-bottom: 1.5rem;"></div>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Every BrakeMaster van is equipped with professional-grade tools: brake lathes for on-site rotor resurfacing, diagnostic scanners, and a full inventory of premium ceramic and semi-metallic pads.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">We invest in the latest technology to ensure precision and efficiency. Our digital inspection system provides photo documentation, so you see exactly what needs repair.</p>
+        <div class="grid-2" style="gap: 1rem; margin-top: 1rem;"><div><i class="fas fa-microchip text-accent"></i> <span>Digital Diagnostics</span></div><div><i class="fas fa-tachometer-alt text-accent"></i> <span>On-Board Lathe</span></div></div>
+      </div>
+      <div><img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format" alt="Brake tools and equipment in mobile van" class="rounded-img"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: Why Trust BrakeMaster (Testimonials + CTA) -->
+<section style="background: var(--bg-secondary);">
+  <div class="container">
+    <h2 class="section-title">Why Drivers <span class="text-accent">Trust Us</span></h2>
+    <div class="accent-divider"></div>
+    <div class="grid-3">
+      <div class="info-card" style="text-align: left;"><i class="fas fa-medal"></i><h3>12-Month Warranty</h3><p>All brake parts and labor backed by our comprehensive warranty.</p></div>
+      <div class="info-card" style="text-align: left;"><i class="fas fa-hand-holding-usd"></i><h3>Price Match Guarantee</h3><p>Found a lower quote? We'll match it. No questions asked.</p></div>
+      <div class="info-card" style="text-align: left;"><i class="fas fa-mobile-alt"></i><h3>Real-Time Tracking</h3><p>Get SMS updates and live ETA of your mobile technician.</p></div>
+    </div>
+    <div style="margin-top: 3rem; background: var(--bg-card); border-radius: 24px; padding: 2.5rem; text-align: center; border: 1px solid var(--border-color);">
+      <h3 class="font-heading" style="font-size: 1.8rem;">Ready to experience <span class="text-accent">mobile brake repair</span> done right?</h3>
+      <p style="margin: 1rem 0; color: var(--text-secondary);">Join thousands of satisfied drivers who chose convenience without compromise.</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="service.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+        <a href="contact.html" class="btn-outline"><i class="fas fa-phone-alt"></i> Call (888) 555-2753</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if(body.classList.contains('dark')) { body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false); }
+    else { body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true); }
+  }
+  if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+  
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() { if(htmlEl.getAttribute('dir') === 'rtl') { htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr'); } else { htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl'); } }
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if(localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+  
+  // Mobile Menu
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() { mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active'); document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : ''; }
+  if(mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => { link.addEventListener('click', () => { if(mobilePanel.classList.contains('show')) toggleMobile(); }); });
+  
+  // Mobile Dropdowns
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if(menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if(i !== icon) i.classList.remove('rotated'); });
+      if(submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+  
+  window.addEventListener('resize', () => { if(window.innerWidth > 1180 && mobilePanel?.classList.contains('show')) toggleMobile(); });
+</script>
+</body>
+</html>

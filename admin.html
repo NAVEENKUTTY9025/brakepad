@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
+    <title>BrakeMaster | Admin Dashboard</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- Root Color Engine - BrakeMaster Theme (Black, White, #FFD428) --- */
+        :root, html[data-theme='light'] {
+            --color-background: #FFFFFF;
+            --color-primary-text: #000000;
+            --color-secondary-text: #4A4A4A;
+            --color-muted-text: #6B6B6B;
+            --color-accent: #FFD428;
+            --color-accent-dark: #E0B800;
+            --color-accent-light: #FFE066;
+            --color-border: #E5E7EB;
+            --color-hover: #FFF9E6;
+            --color-card-bg: #FFFFFF;
+            --color-sidebar-icon: #FFD428;
+            --color-sidebar-bg: #F9FAFB;
+            --color-nav-bg: #000000;
+            --color-nav-text: #FFFFFF;
+            --color-table-header: #F3F4F6;
+            --color-badge-bg: #E5E7EB;
+            --color-badge-text: #1F2937;
+            --color-hamburger: #000000;
+            --color-stat-card: #F9FAFB;
+        }
+        html[data-theme='dark'] {
+            --color-background: #000000;
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #D1D5DB;
+            --color-muted-text: #9CA3AF;
+            --color-accent: #FFD428;
+            --color-accent-dark: #E0B800;
+            --color-accent-light: #FFE066;
+            --color-border: #2A2A2A;
+            --color-hover: #1A1A1A;
+            --color-card-bg: #111111;
+            --color-sidebar-icon: #FFD428;
+            --color-sidebar-bg: #121212;
+            --color-nav-bg: #000000;
+            --color-nav-text: #FFFFFF;
+            --color-table-header: #1F2937;
+            --color-badge-bg: #374151;
+            --color-badge-text: #E5E7EB;
+            --color-hamburger: #FFFFFF;
+            --color-stat-card: #1A1A1A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, 'Inter', sans-serif;
+            transition: background-color 0.2s, color 0.2s;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Helpers */
+        .text-accent { color: var(--color-accent); }
+        .text-primary { color: var(--color-primary-text); }
+        .text-secondary { color: var(--color-secondary-text); }
+        .text-muted { color: var(--color-muted-text); }
+        .bg-accent { background-color: var(--color-accent); }
+        .bg-background { background-color: var(--color-background); }
+        .bg-hover { background-color: var(--color-hover); }
+        .border-border { border-color: var(--color-border); }
+        .card-bg { background-color: var(--color-card-bg); }
+        .bg-sidebar { background-color: var(--color-sidebar-bg); }
+        .bg-table-header { background-color: var(--color-table-header); }
+        .bg-stat-card { background-color: var(--color-stat-card); }
+
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1.25rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 18px -8px rgba(0,0,0,0.04);
+            height: auto;
+        }
+        .dashboard-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 16px 24px -12px rgba(255,212,40,0.12);
+        }
+
+        /* Status Pulse */
+        .status-pulse {
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 9999px;
+            box-shadow: 0 0 0 0 rgba(16,185,129,0.5);
+            animation: pulse2 2s infinite;
+        }
+        @keyframes pulse2 { 70% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
+
+        /* Sidebar Links */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            color: var(--color-secondary-text);
+            transition: all 0.18s ease;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: var(--color-accent);
+            color: #000000;
+        }
+        .sidebar-link:hover svg, .sidebar-link.active svg {
+            stroke: #000000;
+        }
+        .sidebar-link.logout:hover {
+            background: #d13b3b;
+            color: white;
+        }
+        .sidebar-link.logout:hover svg {
+            stroke: white;
+        }
+
+        /* RTL Handling */
+        html[dir="rtl"] .sidebar-link { flex-direction: row-reverse; }
+        html[dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        html[dir="rtl"] .sidebar-link svg { transform: scaleX(-1); }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .admin-section { display: block; }
+        .bg-accent-gradient {
+            background: linear-gradient(145deg, #FFD428 0%, #FFE066 100%);
+        }
+
+        @media (max-width: 400px) {
+            .sidebar-link span {
+                font-size: 13px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 10px; }
+
+        /* Mobile Sidebar Overrides */
+        #mobile-overlay {
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 55;
+        }
+        #mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background: var(--color-nav-bg);
+            border-bottom: 1px solid rgba(255,212,40,0.2);
+        }
+        .nav-logo-text {
+            font-size: 1.6rem !important;
+            font-weight: 700 !important;
+            color: var(--color-nav-text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            font-family: 'Oswald', system-ui, sans-serif;
+        }
+        .nav-logo-text span {
+            color: var(--color-accent);
+        }
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: rgba(255,212,40,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--color-nav-text);
+            border: 1px solid rgba(255,212,40,0.3);
+        }
+        .icon-btn:hover {
+            background: var(--color-accent);
+            color: #000000;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .mobile-menu-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--color-nav-text);
+            stroke: var(--color-nav-text);
+        }
+
+        /* Badge Styles */
+        .badge-active {
+            background-color: rgba(16,185,129,0.15);
+            color: #10b981;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .badge-pending {
+            background-color: rgba(245,158,11,0.15);
+            color: #f59e0b;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .badge-completed {
+            background-color: rgba(16,185,129,0.15);
+            color: #10b981;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .dark .badge-active, .dark .badge-completed {
+            background-color: rgba(16,185,129,0.25);
+            color: #34d399;
+        }
+        .dark .badge-pending {
+            background-color: rgba(245,158,11,0.25);
+            color: #fbbf24;
+        }
+
+        /* Table Styles */
+        .data-table th {
+            color: var(--color-secondary-text);
+            font-weight: 600;
+        }
+        .data-table td {
+            color: var(--color-primary-text);
+        }
+        .data-table tr:hover {
+            background-color: var(--color-hover);
+        }
+
+        /* Stat Card */
+        .stat-card {
+            background-color: var(--color-stat-card);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+        .stat-card:hover {
+            border-color: var(--color-accent);
+        }
+    </style>
+</head>
+<body class="antialiased bg-background flex flex-col min-h-screen w-full">
+
+    <!-- TOP BAR -->
+    <header class="navbar sticky top-0 z-50 w-full">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-3">
+            
+            <!-- Logo + Hamburger -->
+            <div class="flex items-center gap-3">
+                <button id="mobile-menu-toggle" class="mobile-menu-btn lg:hidden" title="Open Menu">
+                    <svg class="mobile-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</a>
+            </div>
+
+            <!-- Right Side Controls -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <button id="rtl-toggle" class="icon-btn" title="RTL Mode">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-width="2" d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 0c2.5 2.8 2.5 12.2 0 15m0-15c-2.5 2.8-2.5 12.2 0 15M3 12h18" />
+                    </svg>
+                </button>
+
+                <button id="theme-toggle" class="icon-btn" title="Dark/Light Mode">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <!-- Admin Profile Badge -->
+               
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay" class="fixed inset-0 lg:hidden"></div>
+
+    <!-- MAIN LAYOUT -->
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex-grow w-full relative">
+        <div class="flex flex-col lg:flex-row gap-6 xl:gap-10">
+            
+            <!-- SIDEBAR -->
+            <aside id="sidebar-container" class="fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 xl:w-80 z-[60] lg:z-10 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-sidebar lg:bg-transparent lg:flex-shrink-0">
+                <div class="dashboard-card p-5 lg:sticky lg:top-24 bg-sidebar h-full lg:h-auto border-r lg:border border-border lg:rounded-[1.25rem] rounded-none shadow-none lg:shadow-md overflow-y-auto">
+                    
+                    <!-- Mobile Sidebar Header -->
+                    <div class="flex lg:hidden justify-between items-center mb-6 px-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black font-bold text-xs">AD</div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">Admin Panel</span>
+                        </div>
+                        <button id="close-sidebar" class="p-2 hover:bg-hover rounded-lg text-primary">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 pb-5 mb-4 border-b border-border">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xl flex-shrink-0">
+                            AD
+                        </div>
+                        <div class="min-w-0">
+                            <p class="font-serif font-bold text-primary truncate">Alex Morgan</p>
+                            <p class="text-[11px] sm:text-xs text-secondary flex items-center gap-1 mt-1">
+                                <span class="inline-block w-2 h-2 bg-emerald-400 rounded-full"></span> Online · Super Admin
+                            </p>
+                        </div>
+                    </div>
+
+                    <nav class="flex flex-col gap-1">
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-2 mb-2 px-2">Main</p>
+                        <a href="#" data-section="dashboard" class="sidebar-link active">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                            <span>Dashboard</span>
+                        </a>
+                        <a href="#" data-section="customers" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                            <span>Customers</span>
+                        </a>
+                        <a href="#" data-section="bookings" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <span>Bookings</span>
+                            <span class="ml-auto bg-accent text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">12</span>
+                        </a>
+                        <a href="#" data-section="services" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span>Services</span>
+                        </a>
+                        
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-4 mb-2 px-2">Management</p>
+                        <a href="#" data-section="technicians" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                            <span>Technicians</span>
+                        </a>
+                        <a href="#" data-section="reports" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                            <span>Reports</span>
+                        </a>
+
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-4 mb-2 px-2">System</p>
+                        <a href="#" data-section="settings" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" data-section="logout" class="sidebar-link logout mt-2" style="color: #ef4444;">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                            <span>Logout</span>
+                        </a>
+                    </nav>
+
+                    <div class="mt-8 pt-4 border-t border-border text-[11px]">
+                        <div class="flex justify-between"><span class="text-muted">System Status</span><span class="font-bold text-accent">Operational</span></div>
+                        <div class="flex justify-between mt-1.5"><span class="text-muted">Total Revenue (MTD)</span><span class="font-medium text-primary">$24,890</span></div>
+                        <div class="flex justify-between mt-1.5"><span class="text-muted">Active Technicians</span><span class="font-medium text-primary">8</span></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <div class="flex-1 min-w-0">
+                
+                <!-- DASHBOARD SECTION -->
+                <div id="dashboard" class="admin-section">
+                    <!-- Stats Cards Row -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="stat-card reveal active"><div class="flex items-center justify-between"><span class="text-muted text-xs uppercase tracking-wide">Total Customers</span><span class="text-accent text-xl">👥</span></div><p class="text-2xl font-bold text-primary mt-2">1,284</p><p class="text-[10px] text-muted mt-1">+12% this month</p></div>
+                        <div class="stat-card reveal active"><div class="flex items-center justify-between"><span class="text-muted text-xs uppercase tracking-wide">Total Bookings</span><span class="text-accent text-xl">📅</span></div><p class="text-2xl font-bold text-primary mt-2">342</p><p class="text-[10px] text-muted mt-1">This month</p></div>
+                        <div class="stat-card reveal active"><div class="flex items-center justify-between"><span class="text-muted text-xs uppercase tracking-wide">Revenue</span><span class="text-accent text-xl">💰</span></div><p class="text-2xl font-bold text-primary mt-2">$24.9k</p><p class="text-[10px] text-muted mt-1">+18% vs last month</p></div>
+                        <div class="stat-card reveal active"><div class="flex items-center justify-between"><span class="text-muted text-xs uppercase tracking-wide">Active Techs</span><span class="text-accent text-xl">🔧</span></div><p class="text-2xl font-bold text-primary mt-2">8</p><p class="text-[10px] text-muted mt-1">On duty today</p></div>
+                    </div>
+
+                    <!-- Recent Bookings Table -->
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <div class="flex justify-between items-center mb-4 flex-wrap gap-3">
+                            <h2 class="text-xl font-serif font-bold text-primary">Recent Bookings</h2>
+                            <button class="text-xs text-accent font-bold hover:underline">View All →</button>
+                        </div>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="data-table w-full text-sm text-left min-w-[600px]">
+                                <thead class="border-b border-border">
+                                    <tr class="bg-table-header"><th class="pb-3 px-2 text-secondary">Booking ID</th><th class="pb-3 px-2 text-secondary">Customer</th><th class="pb-3 px-2 text-secondary">Service</th><th class="pb-3 px-2 text-secondary">Date</th><th class="pb-3 px-2 text-secondary">Status</th><th class="pb-3 px-2 text-secondary">Amount</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr class="hover:bg-hover/30"><td class="py-3 px-2 font-bold">#BK-4892</td><td class="py-3 px-2">Mike Reynolds</td><td class="py-3 px-2">Brake Pad Replacement</td><td class="py-3 px-2">May 25, 2026</td><td class="py-3 px-2"><span class="badge-pending">PENDING</span></td><td class="py-3 px-2 font-medium">$149</td></tr>
+                                    <tr class="hover:bg-hover/30"><td class="py-3 px-2 font-bold">#BK-4891</td><td class="py-3 px-2">Sarah Johnson</td><td class="py-3 px-2">Rotor Replacement</td><td class="py-3 px-2">May 24, 2026</td><td class="py-3 px-2"><span class="badge-completed">COMPLETED</span></td><td class="py-3 px-2 font-medium">$299</td></tr>
+                                    <tr class="hover:bg-hover/30"><td class="py-3 px-2 font-bold">#BK-4890</td><td class="py-3 px-2">David Williams</td><td class="py-3 px-2">Brake Inspection</td><td class="py-3 px-2">May 23, 2026</td><td class="py-3 px-2"><span class="badge-completed">COMPLETED</span></td><td class="py-3 px-2 font-medium">Free</td></tr>
+                                    <tr class="hover:bg-hover/30"><td class="py-3 px-2 font-bold">#BK-4889</td><td class="py-3 px-2">Lisa Chen</td><td class="py-3 px-2">Caliper Service</td><td class="py-3 px-2">May 22, 2026</td><td class="py-3 px-2"><span class="badge-active">IN PROGRESS</span></td><td class="py-3 px-2 font-medium">$249</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="dashboard-card p-5 reveal active"><h3 class="font-bold text-primary mb-3">📊 Today's Schedule</h3><div class="space-y-3"><div class="flex justify-between text-sm"><span class="text-secondary">10:00 AM</span><span class="text-primary">Rotor Replacement - John D.</span><span class="text-accent text-xs">Tech: Mike</span></div><div class="flex justify-between text-sm"><span class="text-secondary">1:30 PM</span><span class="text-primary">Brake Pads - Sarah J.</span><span class="text-accent text-xs">Tech: Jessica</span></div><div class="flex justify-between text-sm"><span class="text-secondary">3:00 PM</span><span class="text-primary">Caliper Repair - Tom R.</span><span class="text-accent text-xs">Tech: David</span></div></div></div>
+                        <div class="dashboard-card p-5 reveal active"><h3 class="font-bold text-primary mb-3">⚠️ Pending Approvals</h3><div class="space-y-3"><div class="flex justify-between items-center"><span class="text-primary">New Technician Application</span><span class="text-accent text-xs">2 pending</span></div><div class="flex justify-between items-center"><span class="text-primary">Customer Refund Requests</span><span class="text-accent text-xs">1 pending</span></div><div class="flex justify-between items-center"><span class="text-primary">Inventory Alerts</span><span class="text-accent text-xs">3 low stock</span></div><button class="mt-3 text-xs text-accent font-bold">Review All →</button></div></div>
+                    </div>
+                </div>
+
+                <!-- CUSTOMERS SECTION -->
+                <div id="customers" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-6">👥 Customer Management</h2>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="data-table w-full text-sm text-left min-w-[650px]">
+                                <thead class="border-b border-border"><tr class="bg-table-header"><th class="pb-3 px-2">Name</th><th class="pb-3 px-2">Email</th><th class="pb-3 px-2">Phone</th><th class="pb-3 px-2">Services</th><th class="pb-3 px-2">Member Since</th><th class="pb-3 px-2">Status</th></tr></thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr><td class="py-3 px-2 font-medium">Mike Reynolds</td><td class="py-3 px-2 text-secondary">mike.r@email.com</td><td class="py-3 px-2 text-secondary">(555) 223-7890</td><td class="py-3 px-2">5</td><td class="py-3 px-2 text-secondary">Jan 2023</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                    <tr><td class="py-3 px-2 font-medium">Sarah Johnson</td><td class="py-3 px-2 text-secondary">sarah.j@email.com</td><td class="py-3 px-2 text-secondary">(555) 345-6789</td><td class="py-3 px-2">3</td><td class="py-3 px-2 text-secondary">Mar 2024</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                    <tr><td class="py-3 px-2 font-medium">David Williams</td><td class="py-3 px-2 text-secondary">david.w@email.com</td><td class="py-3 px-2 text-secondary">(555) 456-7890</td><td class="py-3 px-2">2</td><td class="py-3 px-2 text-secondary">Jun 2024</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOOKINGS SECTION -->
+                <div id="bookings" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-6">📅 All Bookings</h2>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="data-table w-full text-sm text-left min-w-[700px]">
+                                <thead class="border-b border-border"><tr class="bg-table-header"><th class="pb-3 px-2">ID</th><th class="pb-3 px-2">Customer</th><th class="pb-3 px-2">Service</th><th class="pb-3 px-2">Date & Time</th><th class="pb-3 px-2">Technician</th><th class="pb-3 px-2">Status</th><th class="pb-3 px-2">Action</th></tr></thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr><td class="py-3 px-2 font-bold">#BK-4892</td><td class="py-3 px-2">Mike R.</td><td class="py-3 px-2">Brake Pads</td><td class="py-3 px-2">May 25, 10:30 AM</td><td class="py-3 px-2">Unassigned</td><td class="py-3 px-2"><span class="badge-pending">PENDING</span></td><td class="py-3 px-2"><button class="text-accent text-xs font-bold">Assign</button></td></tr>
+                                    <tr><td class="py-3 px-2 font-bold">#BK-4891</td><td class="py-3 px-2">Sarah J.</td><td class="py-3 px-2">Rotor Replacement</td><td class="py-3 px-2">May 24, 2:00 PM</td><td class="py-3 px-2">Jessica C.</td><td class="py-3 px-2"><span class="badge-completed">COMPLETED</span></td><td class="py-3 px-2"><button class="text-accent text-xs font-bold">View</button></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICES SECTION -->
+                <div id="services" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-6">🔧 Service Management</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Brake Pad Replacement</p><p class="text-xs text-muted">Premium ceramic pads</p></div><div><span class="font-bold text-accent">$149+</span><button class="ml-4 text-xs text-accent">Edit</button></div></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Rotor Replacement</p><p class="text-xs text-muted">Per axle, premium grade</p></div><div><span class="font-bold text-accent">$199+</span><button class="ml-4 text-xs text-accent">Edit</button></div></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Caliper Service</p><p class="text-xs text-muted">Includes fluid flush</p></div><div><span class="font-bold text-accent">$249+</span><button class="ml-4 text-xs text-accent">Edit</button></div></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Brake Inspection</p><p class="text-xs text-muted">Free diagnostic</p></div><div><span class="font-bold text-accent">Free</span><button class="ml-4 text-xs text-accent">Edit</button></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TECHNICIANS SECTION -->
+                <div id="technicians" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-6">👨‍🔧 Technician Management</h2>
+                        <div class="overflow-x-auto custom-scrollbar">
+                            <table class="data-table w-full text-sm text-left min-w-[600px]">
+                                <thead class="border-b border-border"><tr class="bg-table-header"><th class="pb-3 px-2">Name</th><th class="pb-3 px-2">Specialty</th><th class="pb-3 px-2">Today's Jobs</th><th class="pb-3 px-2">Rating</th><th class="pb-3 px-2">Status</th></tr></thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr><td class="py-3 px-2 font-medium">Mike Reynolds</td><td class="py-3 px-2 text-secondary">Brake Specialist</td><td class="py-3 px-2">3</td><td class="py-3 px-2">4.9 ★</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                    <tr><td class="py-3 px-2 font-medium">Jessica Chen</td><td class="py-3 px-2 text-secondary">Rotor Expert</td><td class="py-3 px-2">2</td><td class="py-3 px-2">5.0 ★</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                    <tr><td class="py-3 px-2 font-medium">David Ortiz</td><td class="py-3 px-2 text-secondary">Caliper Service</td><td class="py-3 px-2">1</td><td class="py-3 px-2">4.8 ★</td><td class="py-3 px-2"><span class="badge-active">Active</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REPORTS SECTION -->
+                <div id="reports" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-6">📊 Reports</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Monthly Revenue Report</p><p class="text-xs text-muted">April 2026</p></div><button class="text-accent text-sm">Download PDF →</button></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Customer Analytics</p><p class="text-xs text-muted">Q2 2026</p></div><button class="text-accent text-sm">Download CSV →</button></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Technician Performance</p><p class="text-xs text-muted">May 2026</p></div><button class="text-accent text-sm">Download PDF →</button></div>
+                            <div class="p-4 border border-border rounded-xl flex justify-between items-center"><div><p class="font-bold text-primary">Service Popularity</p><p class="text-xs text-muted">YTD</p></div><button class="text-accent text-sm">Download →</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS SECTION -->
+                <div id="settings" class="admin-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl font-serif font-bold text-primary mb-8">⚙️ System Settings</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between pb-4 border-b border-border"><div><p class="font-bold text-primary">Email Notifications</p><p class="text-xs text-muted">Admin alerts for new bookings</p></div><div class="w-12 h-6 bg-accent rounded-full p-1 flex items-center justify-end cursor-pointer"><span class="w-4 h-4 bg-white rounded-full"></span></div></div>
+                            <div class="flex items-center justify-between pb-4 border-b border-border"><div><p class="font-bold text-primary">Auto-assign Technicians</p><p class="text-xs text-muted">Automatic booking assignment</p></div><div class="w-12 h-6 bg-accent rounded-full p-1 flex items-center justify-end cursor-pointer"><span class="w-4 h-4 bg-white rounded-full"></span></div></div>
+                            <div class="flex items-center justify-between pb-4 border-b border-border"><div><p class="font-bold text-primary">Maintenance Mode</p><p class="text-xs text-muted">Temporarily disable bookings</p></div><div class="w-12 h-6 bg-border rounded-full p-1 flex items-center cursor-pointer"><span class="w-4 h-4 bg-white rounded-full"></span></div></div>
+                            <div class="pt-2"><button class="bg-hover border border-border px-6 py-2 rounded-full text-xs font-bold text-primary hover:bg-border transition">Backup Database</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOGOUT -->
+                <div id="logout" class="admin-section hidden">
+                    <div class="dashboard-card p-10 reveal active text-center max-w-lg mx-auto">
+                        <div class="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center text-accent text-3xl mb-6">↪️</div>
+                        <h2 class="text-2xl font-serif font-bold text-primary">Sign out of Admin Panel?</h2>
+                        <p class="text-secondary mt-3 text-sm">Your admin session will be terminated.</p>
+                        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                            <button class="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-3 rounded-full text-xs transition">Yes, Sign Out</button>
+                            <button onclick="activateSection('dashboard')" class="bg-hover border border-border px-8 py-3 rounded-full text-xs font-bold text-primary transition">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SYSTEM STATUS BANNER -->
+                <div class="bg-accent-gradient rounded-3xl p-5 mt-8 text-black reveal flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3"><span class="w-2 h-2 bg-black rounded-full animate-pulse"></span><p class="text-sm font-bold">📡 Admin Console Active</p><p class="text-xs text-black/70">Last sync: Just now</p></div>
+                    <div class="flex gap-3"><span class="bg-black/20 px-3 py-1 rounded-full text-xs">System v2.4.0</span><span class="bg-black/20 px-3 py-1 rounded-full text-xs">2 users online</span></div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="mt-10 text-center text-[10px] text-muted border-t border-border pt-6 pb-8">
+                    <p class="uppercase tracking-widest font-bold opacity-60">© 2026 BrakeMaster · Admin Dashboard</p>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            const htmlEl = document.documentElement;
+
+            // Mobile Menu
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar-container');
+            const overlay = document.getElementById('mobile-overlay');
+
+            function toggleMobileMenu(isOpen) {
+                if (isOpen) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu(true));
+            if (closeSidebar) closeSidebar.addEventListener('click', () => toggleMobileMenu(false));
+            if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const lightIcons = document.querySelectorAll('.light-icon');
+            const darkIcons = document.querySelectorAll('.dark-icon');
+            function setTheme(theme) {
+                htmlEl.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                lightIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'dark'));
+                darkIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'light'));
+                document.body.classList.toggle('dark', theme === 'dark');
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            if (themeToggle) themeToggle.addEventListener('click', () => setTheme(htmlEl.getAttribute('data-theme') === 'light' ? 'dark' : 'light'));
+
+            // RTL Toggle
+            const rtlToggle = document.getElementById('rtl-toggle');
+            function setDirection(dir) {
+                htmlEl.setAttribute('dir', dir);
+                localStorage.setItem('direction', dir === 'rtl' ? 'rtl' : 'ltr');
+            }
+            setDirection(localStorage.getItem('direction') || 'ltr');
+            if (rtlToggle) rtlToggle.addEventListener('click', () => setDirection(htmlEl.getAttribute('dir') === 'ltr' ? 'rtl' : 'ltr'));
+
+            // Navigation
+            const sections = ['dashboard', 'customers', 'bookings', 'services', 'technicians', 'reports', 'settings', 'logout'];
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            
+            window.activateSection = function(sectionId) {
+                sections.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
+                const activeEl = document.getElementById(sectionId);
+                if (activeEl) activeEl.classList.remove('hidden');
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.section === sectionId) link.classList.add('active');
+                });
+                if (window.innerWidth < 1024) { toggleMobileMenu(false); window.scrollTo(0, 0); }
+            };
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    if (section) activateSection(section);
+                });
+            });
+            activateSection('dashboard');
+
+            // Reveal Animations
+            function checkReveal() {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+                });
+            }
+            window.addEventListener('scroll', checkReveal);
+            window.addEventListener('load', checkReveal);
+        })();
+    </script>
+</body>
+</html>

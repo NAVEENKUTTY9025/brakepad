@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
+    <title>BrakeMaster | Client Dashboard</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* --- Root Color Engine - BrakeMaster Theme (Black, White, #FFD428) --- */
+        :root, html[data-theme='light'] {
+            --color-background: #FFFFFF;
+            --color-primary-text: #000000;
+            --color-secondary-text: #4A4A4A;
+            --color-muted-text: #6B6B6B;
+            --color-accent: #FFD428;
+            --color-accent-dark: #E0B800;
+            --color-accent-light: #FFE066;
+            --color-border: #E5E7EB;
+            --color-hover: #FFF9E6;
+            --color-card-bg: #FFFFFF;
+            --color-sidebar-icon: #FFD428;
+            --color-sidebar-bg: #F9FAFB;
+            --color-nav-bg: #000000;
+            --color-nav-text: #FFFFFF;
+            --color-table-header: #F3F4F6;
+            --color-badge-bg: #E5E7EB;
+            --color-badge-text: #1F2937;
+            --color-hamburger: #000000;
+        }
+        html[data-theme='dark'] {
+            --color-background: #000000;
+            --color-primary-text: #FFFFFF;
+            --color-secondary-text: #D1D5DB;
+            --color-muted-text: #9CA3AF;
+            --color-accent: #FFD428;
+            --color-accent-dark: #E0B800;
+            --color-accent-light: #FFE066;
+            --color-border: #2A2A2A;
+            --color-hover: #1A1A1A;
+            --color-card-bg: #111111;
+            --color-sidebar-icon: #FFD428;
+            --color-sidebar-bg: #121212;
+            --color-nav-bg: #000000;
+            --color-nav-text: #FFFFFF;
+            --color-table-header: #1F2937;
+            --color-badge-bg: #374151;
+            --color-badge-text: #E5E7EB;
+            --color-hamburger: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-primary-text);
+            font-family: ui-sans-serif, system-ui, -apple-system, 'Inter', sans-serif;
+            transition: background-color 0.2s, color 0.2s;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Helpers */
+        .text-accent { color: var(--color-accent); }
+        .text-primary { color: var(--color-primary-text); }
+        .text-secondary { color: var(--color-secondary-text); }
+        .text-muted { color: var(--color-muted-text); }
+        .bg-accent { background-color: var(--color-accent); }
+        .bg-background { background-color: var(--color-background); }
+        .bg-hover { background-color: var(--color-hover); }
+        .border-border { border-color: var(--color-border); }
+        .card-bg { background-color: var(--color-card-bg); }
+        .bg-sidebar { background-color: var(--color-sidebar-bg); }
+        .bg-table-header { background-color: var(--color-table-header); }
+
+        /* Dashboard Cards */
+        .dashboard-card {
+            background-color: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1.25rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 18px -8px rgba(0,0,0,0.04);
+            height: auto;
+        }
+        .dashboard-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 16px 24px -12px rgba(255,212,40,0.12);
+        }
+
+        /* Status Pulse */
+        .status-pulse {
+            width: 10px;
+            height: 10px;
+            background-color: #10b981;
+            border-radius: 9999px;
+            box-shadow: 0 0 0 0 rgba(16,185,129,0.5);
+            animation: pulse2 2s infinite;
+        }
+        @keyframes pulse2 { 70% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
+
+        /* Sidebar Links */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            color: var(--color-secondary-text);
+            transition: all 0.18s ease;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background-color: var(--color-accent);
+            color: #000000;
+        }
+        .sidebar-link:hover svg, .sidebar-link.active svg {
+            stroke: #000000;
+        }
+        .sidebar-link.logout:hover {
+            background: #d13b3b;
+            color: white;
+        }
+        .sidebar-link.logout:hover svg {
+            stroke: white;
+        }
+
+        /* RTL Handling */
+        html[dir="rtl"] .sidebar-link { flex-direction: row-reverse; }
+        html[dir="rtl"] .ml-auto { margin-right: auto; margin-left: 0; }
+        html[dir="rtl"] .sidebar-link svg { transform: scaleX(-1); }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .user-section { display: block; }
+        .bg-accent-gradient {
+            background: linear-gradient(145deg, #FFD428 0%, #FFE066 100%);
+        }
+
+        @media (max-width: 400px) {
+            .sidebar-link span {
+                font-size: 13px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 10px; }
+
+        /* Mobile Sidebar Overrides */
+        #mobile-overlay {
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 55;
+        }
+        #mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Navbar styles matching home2.html */
+        .navbar {
+            background: var(--color-nav-bg);
+            border-bottom: 1px solid rgba(255,212,40,0.2);
+        }
+        .nav-logo-text {
+            font-size: 1.6rem !important;
+            font-weight: 700 !important;
+            color: var(--color-nav-text);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            font-family: 'Oswald', system-ui, sans-serif;
+        }
+        .nav-logo-text span {
+            color: var(--color-accent);
+        }
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: rgba(255,212,40,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--color-nav-text);
+            border: 1px solid rgba(255,212,40,0.3);
+        }
+        .icon-btn:hover {
+            background: var(--color-accent);
+            color: #000000;
+        }
+
+        /* Mobile Menu Button - Fixed Visibility */
+        .mobile-menu-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .mobile-menu-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--color-nav-text);
+            stroke: var(--color-nav-text);
+        }
+
+        /* Badge Styles */
+        .badge-completed {
+            background-color: rgba(16,185,129,0.15);
+            color: #10b981;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .badge-free {
+            background-color: rgba(255,212,40,0.2);
+            color: var(--color-accent-dark);
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+        .dark .badge-completed {
+            background-color: rgba(16,185,129,0.25);
+            color: #34d399;
+        }
+        .dark .badge-free {
+            background-color: rgba(255,212,40,0.25);
+            color: var(--color-accent);
+        }
+
+        /* Table Styles */
+        .data-table th {
+            color: var(--color-secondary-text);
+            font-weight: 600;
+        }
+        .data-table td {
+            color: var(--color-primary-text);
+        }
+        .data-table tr:hover {
+            background-color: var(--color-hover);
+        }
+
+        /* Profile Badge Text Fix for Light Mode */
+        .profile-name {
+            color: var(--color-primary-text);
+        }
+        .profile-role {
+            color: var(--color-secondary-text);
+        }
+
+        /* Fix for light mode visibility */
+        .text-dark-force {
+            color: #000000;
+        }
+        .dark .text-dark-force {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="antialiased bg-background flex flex-col min-h-screen w-full">
+
+    <!-- TOP BAR - Matching home2.html style -->
+    <header class="navbar sticky top-0 z-50 w-full">
+        <div class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-3 flex items-center justify-between gap-3">
+            
+            <!-- Logo + Hamburger - Fixed for mobile visibility -->
+            <div class="flex items-center gap-3">
+                <button id="mobile-menu-toggle" class="mobile-menu-btn lg:hidden" title="Open Menu">
+                    <svg class="mobile-menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</a>
+            </div>
+
+            <!-- Right Side Controls -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <button id="rtl-toggle" class="icon-btn" title="RTL Mode">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-width="2" d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 0c2.5 2.8 2.5 12.2 0 15m0-15c-2.5 2.8-2.5 12.2 0 15M3 12h18" />
+                    </svg>
+                </button>
+
+                <button id="theme-toggle" class="icon-btn" title="Dark/Light Mode">
+                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
+                </button>
+
+                <!-- Profile Badge - Fixed visibility in light mode -->
+               
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE OVERLAY -->
+    <div id="mobile-overlay" class="fixed inset-0 lg:hidden"></div>
+
+    <!-- MAIN LAYOUT -->
+    <main class="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-10 py-6 flex-grow w-full relative">
+        <div class="flex flex-col lg:flex-row gap-6 xl:gap-10">
+            
+            <!-- SIDEBAR -->
+            <aside id="sidebar-container" class="fixed lg:static top-0 left-0 h-full lg:h-auto w-72 lg:w-72 xl:w-80 z-[60] lg:z-10 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out bg-sidebar lg:bg-transparent lg:flex-shrink-0">
+                <div class="dashboard-card p-5 lg:sticky lg:top-24 bg-sidebar h-full lg:h-auto border-r lg:border border-border lg:rounded-[1.25rem] rounded-none shadow-none lg:shadow-md overflow-y-auto">
+                    
+                    <!-- Mobile Sidebar Header -->
+                    <div class="flex lg:hidden justify-between items-center mb-6 px-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-black font-bold text-xs">MR</div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-primary">Dashboard</span>
+                        </div>
+                        <button id="close-sidebar" class="p-2 hover:bg-hover rounded-lg text-primary">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3 pb-5 mb-4 border-b border-border">
+                        <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xl flex-shrink-0">
+                            MR
+                        </div>
+                        <div class="min-w-0">
+                            <p class="font-serif font-bold text-primary truncate">Mike Reynolds</p>
+                            <p class="text-[11px] sm:text-xs text-secondary flex items-center gap-1 mt-1">
+                                <span class="inline-block w-2 h-2 bg-emerald-400 rounded-full"></span> Active · ASE Certified
+                            </p>
+                        </div>
+                    </div>
+
+                    <nav class="flex flex-col gap-1">
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-2 mb-2 px-2">Account</p>
+                        <a href="#" data-section="profile" class="sidebar-link active">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                            <span>Profile Management</span>
+                        </a>
+                        <a href="#" data-section="orders" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                            <span>Service History</span>
+                        </a>
+                        <a href="#" data-section="saved" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                            <span>Saved Vehicles</span>
+                        </a>
+                        
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-4 mb-2 px-2">Support</p>
+                        <a href="#" data-section="messages" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+                            <span>Messages</span>
+                            <span class="ml-auto bg-accent text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+                        </a>
+
+                        <p class="text-[10px] uppercase tracking-wider text-muted font-bold mt-4 mb-2 px-2">System</p>
+                        <a href="#" data-section="settings" class="sidebar-link">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#" data-section="logout" class="sidebar-link logout mt-2" style="color: #ef4444;">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                            <span>Logout</span>
+                        </a>
+                    </nav>
+
+                    <div class="mt-8 pt-4 border-t border-border text-[11px]">
+                        <div class="flex justify-between"><span class="text-muted">Membership</span><span class="font-bold text-accent">Premium Plus</span></div>
+                        <div class="flex justify-between mt-1.5"><span class="text-muted">Next Service</span><span class="font-medium text-primary">May 25, 2026</span></div>
+                        <div class="flex justify-between mt-1.5"><span class="text-muted">Vehicles Saved</span><span class="font-medium text-primary">2</span></div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CONTENT AREA -->
+            <div class="flex-1 min-w-0">
+                
+                <!-- PROFILE SECTION -->
+                <div id="profile" class="user-section">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                            <h2 class="text-xl sm:text-2xl font-serif font-bold text-primary flex items-center gap-2">
+                                <span class="text-accent">👤</span> Profile Management
+                            </h2>
+                            <button class="w-full sm:w-auto text-sm bg-accent/10 hover:bg-accent/20 text-accent font-semibold px-5 py-2.5 rounded-full transition">Edit Profile</button>
+                        </div>
+                        
+                        <div class="mt-8 flex flex-col md:flex-row gap-8 items-start">
+                            <div class="relative mx-auto md:mx-0">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-accent/10 flex items-center justify-center border-2 border-accent flex-shrink-0">
+                                    <span class="text-3xl sm:text-4xl text-accent font-bold">MR</span>
+                                </div>
+                                <span class="absolute bottom-1 right-1 w-6 h-6 bg-emerald-500 border-4 border-white dark:border-black rounded-full"></span>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-8 flex-1 w-full text-sm sm:text-base">
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Full Name</p><p class="font-semibold text-primary">Mike Reynolds</p></div>
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Email</p><p class="font-semibold text-primary truncate">mike.r@brakemaster.com</p></div>
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Member Since</p><p class="font-semibold text-primary">January 2023</p></div>
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Phone</p><p class="font-semibold text-primary">+1 (555) 223-7890</p></div>
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Preferred Location</p><p class="font-semibold text-primary">Chicago, IL</p></div>
+                                <div><p class="text-xs text-muted uppercase tracking-wide mb-1">Vehicle</p><p class="font-semibold text-primary">2021 Toyota Camry</p></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 pt-6 border-t border-border flex flex-wrap gap-2 sm:gap-4">
+                            <span class="bg-hover px-4 py-1.5 rounded-full text-xs font-medium border border-border text-primary">✅ Verified Account</span>
+                            <span class="bg-hover px-4 py-1.5 rounded-full text-xs font-medium border border-border text-primary">🏆 3-Year Member</span>
+                            <span class="bg-hover px-4 py-1.5 rounded-full text-xs font-medium border border-border text-primary">🔧 5 Services Completed</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="dashboard-card p-6 reveal">
+                            <span class="text-accent font-bold text-xs uppercase tracking-widest">Service Credit</span>
+                            <p class="text-3xl font-black text-primary mt-2">$149</p>
+                            <div class="w-full bg-border h-2.5 rounded-full mt-4 overflow-hidden">
+                                <div class="w-8/12 h-full rounded-full bg-accent"></div>
+                            </div>
+                            <p class="text-xs text-muted mt-3">$349 away from free brake inspection</p>
+                        </div>
+                        <div class="dashboard-card p-6 reveal">
+                            <span class="text-accent font-bold text-xs uppercase tracking-widest">Next Appointment</span>
+                            <p class="text-xl font-bold text-primary mt-2">Brake Pad Replacement</p>
+                            <p class="text-sm text-secondary mt-1">Scheduled for May 25, 2026 · 10:30 AM</p>
+                            <button class="mt-4 text-xs font-bold text-accent hover:underline uppercase tracking-tighter">Reschedule →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SERVICE HISTORY -->
+                <div id="orders" class="user-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-primary flex items-center gap-2 mb-6">
+                            <span class="text-accent">🔧</span> Service History
+                        </h2>
+                        <div class="overflow-x-auto custom-scrollbar -mx-5 sm:mx-0 px-5 sm:px-0">
+                            <table class="data-table w-full text-sm text-left min-w-[500px]">
+                                <thead class="border-b border-border">
+                                    <tr class="bg-table-header">
+                                        <th class="pb-3 px-2 text-secondary font-semibold">Service ID</th>
+                                        <th class="pb-3 px-2 text-secondary font-semibold">Date</th>
+                                        <th class="pb-3 px-2 text-secondary font-semibold">Service</th>
+                                        <th class="pb-3 px-2 text-secondary font-semibold">Amount</th>
+                                        <th class="pb-3 px-2 text-secondary font-semibold">Status</th>
+                                        <th class="pb-3 px-2 text-right text-secondary font-semibold">Invoice</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-border/40">
+                                    <tr class="hover:bg-hover/30 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-primary">#BK-4821</td>
+                                        <td class="py-4 px-2 text-secondary">Apr 10, 2026</td>
+                                        <td class="py-4 px-2 text-primary">Brake Pad Replacement</td>
+                                        <td class="py-4 px-2 font-medium text-primary">$149.00</td>
+                                        <td class="py-4 px-2"><span class="badge-completed">COMPLETED</span></td>
+                                        <td class="py-4 px-2 text-right"><button class="text-accent font-bold hover:scale-110 transition">PDF</button></td>
+                                    </tr>
+                                    <tr class="hover:bg-hover/30 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-primary">#BK-3756</td>
+                                        <td class="py-4 px-2 text-secondary">Jan 15, 2026</td>
+                                        <td class="py-4 px-2 text-primary">Rotor Replacement</td>
+                                        <td class="py-4 px-2 font-medium text-primary">$299.00</td>
+                                        <td class="py-4 px-2"><span class="badge-completed">COMPLETED</span></td>
+                                        <td class="py-4 px-2 text-right"><button class="text-accent font-bold hover:scale-110 transition">PDF</button></td>
+                                    </tr>
+                                    <tr class="hover:bg-hover/30 transition-colors">
+                                        <td class="py-4 px-2 font-bold text-primary">#BK-2641</td>
+                                        <td class="py-4 px-2 text-secondary">Oct 3, 2025</td>
+                                        <td class="py-4 px-2 text-primary">Brake Inspection</td>
+                                        <td class="py-4 px-2 font-medium text-primary">$0.00</td>
+                                        <td class="py-4 px-2"><span class="badge-free">FREE</span></td>
+                                        <td class="py-4 px-2 text-right"><button class="text-accent font-bold hover:scale-110 transition">PDF</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-8 pt-4 border-t border-border flex justify-between items-center text-xs">
+                            <span class="text-muted font-medium">Showing latest 3 services</span>
+                            <a href="#" class="text-accent font-bold hover:underline">View All History →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MESSAGES -->
+                <div id="messages" class="user-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl sm:text-2xl font-serif font-bold text-primary flex items-center gap-2"><span class="text-accent">💬</span> Messages</h2>
+                            <span class="bg-accent text-black px-3 py-1 rounded-full text-[10px] font-bold">2 UNREAD</span>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-2xl bg-hover border border-border flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center font-bold text-accent flex-shrink-0">JS</div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                                        <p class="font-bold text-primary text-sm">Jessica Chen <span class="text-[10px] text-accent ml-2 uppercase">Support</span></p>
+                                        <span class="text-[10px] text-muted">2h ago</span>
+                                    </div>
+                                    <p class="text-sm text-secondary">Your appointment confirmation for May 25th has been sent. Please review and confirm.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-hover border border-border flex items-start gap-4">
+                                <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center font-bold text-accent flex-shrink-0">BM</div>
+                                <div class="min-w-0 flex-1">
+                                    <div class="flex justify-between items-center mb-1 flex-wrap gap-2">
+                                        <p class="font-bold text-primary text-sm">BrakeMaster Team</p>
+                                        <span class="text-[10px] text-muted">Yesterday</span>
+                                    </div>
+                                    <p class="text-sm text-secondary">Thank you for being a loyal customer! Enjoy 15% off your next rotor replacement.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 py-3 text-xs font-bold text-accent border border-accent/20 rounded-xl hover:bg-accent/5 transition">Open Full Messenger</button>
+                    </div>
+                </div>
+
+                <!-- SAVED VEHICLES -->
+                <div id="saved" class="user-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-primary mb-6 flex items-center gap-2"><span class="text-accent">🚗</span> Saved Vehicles</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-2xl border border-border flex items-center gap-4 hover:border-accent transition">
+                                <div class="text-2xl">🚙</div>
+                                <div class="min-w-0 flex-1">
+                                    <p class="font-bold text-primary text-sm truncate">2021 Toyota Camry</p>
+                                    <p class="text-[10px] text-muted">VIN: 4T1B11HK2JU123456</p>
+                                </div>
+                                <button class="text-accent text-xl">×</button>
+                            </div>
+                            <div class="p-4 rounded-2xl border border-border flex items-center gap-4 hover:border-accent transition">
+                                <div class="text-2xl">🚗</div>
+                                <div class="min-w-0 flex-1">
+                                    <p class="font-bold text-primary text-sm truncate">2018 Honda CR-V</p>
+                                    <p class="text-[10px] text-muted">VIN: 2HKRW2H53JH123789</p>
+                                </div>
+                                <button class="text-accent text-xl">×</button>
+                            </div>
+                        </div>
+                        <button class="w-full mt-6 py-2.5 text-xs font-bold text-accent border border-accent/20 rounded-xl hover:bg-accent/5 transition">+ Add New Vehicle</button>
+                    </div>
+                </div>
+
+                <!-- SETTINGS -->
+                <div id="settings" class="user-section hidden">
+                    <div class="dashboard-card p-5 sm:p-7 reveal active">
+                        <h2 class="text-xl sm:text-2xl font-serif font-bold text-primary mb-8">⚙️ Account Settings</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between pb-4 border-b border-border">
+                                <div><p class="font-bold text-primary text-sm">Email Notifications</p><p class="text-xs text-muted">Service reminders and offers</p></div>
+                                <div class="w-12 h-6 bg-accent rounded-full p-1 flex items-center justify-end cursor-pointer"><span class="w-4 h-4 bg-white rounded-full"></span></div>
+                            </div>
+                            <div class="flex items-center justify-between pb-4 border-b border-border">
+                                <div><p class="font-bold text-primary text-sm">SMS Alerts</p><p class="text-xs text-muted">Urgent schedule changes</p></div>
+                                <div class="w-12 h-6 bg-border rounded-full p-1 flex items-center cursor-pointer"><span class="w-4 h-4 bg-white rounded-full"></span></div>
+                            </div>
+                            <div class="flex items-center justify-between pb-4 border-b border-border">
+                                <div><p class="font-bold text-primary text-sm">Language</p></div>
+                                <span class="text-accent text-sm font-bold">English (US)</span>
+                            </div>
+                            <div class="pt-2"><button class="bg-hover border border-border px-6 py-2 rounded-full text-xs font-bold text-primary hover:bg-border transition">Reset Password</button></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOGOUT -->
+                <div id="logout" class="user-section hidden">
+                    <div class="dashboard-card p-10 reveal active text-center max-w-lg mx-auto">
+                        <div class="w-20 h-20 mx-auto bg-accent/10 rounded-full flex items-center justify-center text-accent text-3xl mb-6">↪️</div>
+                        <h2 class="text-2xl font-serif font-bold text-primary">Sign out of your account?</h2>
+                        <p class="text-secondary mt-3 text-sm leading-relaxed">Your service history and saved vehicles will be waiting for your return.</p>
+                        <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                            <button class="bg-red-500 hover:bg-red-600 text-white font-bold px-8 py-3 rounded-full text-xs transition shadow-lg shadow-red-200">Yes, Sign Out</button>
+                            <button onclick="activateSection('profile')" class="bg-hover border border-border px-8 py-3 rounded-full text-xs font-bold text-primary transition">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SYSTEM STATUS -->
+                <div class="bg-accent-gradient rounded-3xl p-6 sm:p-8 mt-10 text-black reveal flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl shadow-yellow-200">
+                    <div class="flex items-center gap-4 text-center sm:text-left">
+                        <span class="w-3 h-3 bg-black rounded-full animate-ping flex-shrink-0"></span>
+                        <div>
+                            <p class="font-black text-lg tracking-tight">System Online</p>
+                            <p class="text-xs text-black/70">Connected to BrakeMaster Service Network</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="bg-black/20 backdrop-blur-md px-5 py-2 rounded-full text-xs font-bold text-black">Next Service: May 25 @ 10:30 AM</span>
+                    </div>
+                </div>
+
+                <!-- FOOTER -->
+                <footer class="mt-12 text-center text-[10px] text-muted border-t border-border pt-8 pb-12 w-full">
+                    <p class="uppercase tracking-widest font-bold opacity-60">© 2026 BrakeMaster · Client Dashboard</p>
+                    <div class="flex justify-center gap-6 mt-4">
+                        <span class="hover:text-accent cursor-pointer transition text-muted">Technical Help</span>
+                        <span class="hover:text-accent cursor-pointer transition text-muted">Privacy Policy</span>
+                        <span class="hover:text-accent cursor-pointer transition text-muted">Service Terms</span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        (function() {
+            'use strict';
+
+            const htmlEl = document.documentElement;
+
+            // ----- 1. MOBILE MENU -----
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const closeSidebar = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('sidebar-container');
+            const overlay = document.getElementById('mobile-overlay');
+
+            function toggleMobileMenu(isOpen) {
+                if (isOpen) {
+                    sidebar.classList.remove('-translate-x-full');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden'; 
+                } else {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            if (menuToggle) menuToggle.addEventListener('click', () => toggleMobileMenu(true));
+            if (closeSidebar) closeSidebar.addEventListener('click', () => toggleMobileMenu(false));
+            if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
+
+            // ----- 2. THEME ENGINE -----
+            const themeToggle = document.getElementById('theme-toggle');
+            const lightIcons = document.querySelectorAll('.light-icon');
+            const darkIcons = document.querySelectorAll('.dark-icon');
+
+            function setTheme(theme) {
+                htmlEl.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                lightIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'dark'));
+                darkIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'light'));
+                document.body.classList.toggle('dark', theme === 'dark');
+            }
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const current = htmlEl.getAttribute('data-theme');
+                    setTheme(current === 'light' ? 'dark' : 'light');
+                });
+            }
+
+            // ----- 3. RTL ENGINE -----
+            const rtlToggle = document.getElementById('rtl-toggle');
+            function setDirection(dir) {
+                htmlEl.setAttribute('dir', dir);
+                localStorage.setItem('direction', dir === 'rtl' ? 'rtl' : 'ltr');
+            }
+            const savedDir = localStorage.getItem('direction') || 'ltr';
+            setDirection(savedDir);
+            if (rtlToggle) {
+                rtlToggle.addEventListener('click', () => {
+                    const currentDir = htmlEl.getAttribute('dir') || 'ltr';
+                    setDirection(currentDir === 'ltr' ? 'rtl' : 'ltr');
+                });
+            }
+
+            // ----- 4. REVEAL SCROLL -----
+            function checkReveal() {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(el => {
+                    const windowHeight = window.innerHeight;
+                    const revealTop = el.getBoundingClientRect().top;
+                    if (revealTop < windowHeight - 50) el.classList.add('active');
+                });
+            }
+            window.addEventListener('scroll', checkReveal);
+            window.addEventListener('load', checkReveal);
+
+            // ----- 5. NAVIGATION -----
+            const sections = ['profile', 'orders', 'saved', 'messages', 'settings', 'logout'];
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            
+            window.activateSection = function(sectionId) {
+                sections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+                const activeEl = document.getElementById(sectionId);
+                if (activeEl) activeEl.classList.remove('hidden');
+                sidebarLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.section === sectionId) link.classList.add('active');
+                });
+                if (window.innerWidth < 1024) {
+                    toggleMobileMenu(false);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.dataset.section;
+                    if (section) activateSection(section);
+                });
+            });
+            activateSection('profile');
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FAQ | BrakeMaster - Mobile Brake Repair & Rotor Replacement</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
+  <meta name="description" content="Frequently asked questions about mobile brake repair, rotor replacement, pricing, warranty, and service process. Find answers from BrakeMaster experts.">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Reset & Base - Three Color System: Black, White, #FFD428 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light mode (default) */
+    :root {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F5F5F5;
+      --bg-card: #FFFFFF;
+      --bg-nav: #000000;
+      --text-primary: #000000;
+      --text-secondary: #333333;
+      --text-muted: #555555;
+      --border-color: #E0E0E0;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.1);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #CCCCCC;
+      --footer-bg: #000000;
+    }
+
+    /* Dark mode */
+    body.dark {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-nav: #000000;
+      --text-primary: #FFFFFF;
+      --text-secondary: #DDDDDD;
+      --text-muted: #AAAAAA;
+      --border-color: #2A2A2A;
+      --accent: #FFD428;
+      --accent-dark: #E0B800;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      --shadow-md: 0 8px 24px rgba(0,0,0,0.6);
+      --nav-text: #FFFFFF;
+      --footer-text: #FFFFFF;
+      --footer-text-muted: #BBBBBB;
+      --footer-bg: #000000;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      line-height: 1.5;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .font-heading {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    /* Utility Classes */
+    .text-accent {
+      color: var(--accent);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000000;
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #E0B800;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255,212,40,0.4);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: #000000;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(0, 0, 0, 0.85); /* Glassmorphism */
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: fixed;
+      width: calc(100% - 40px);
+      top: 15px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .flex-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+    .nav-logo-text {
+      font-size: 1.6rem !important;
+      font-weight: 700 !important;
+      color: var(--nav-text);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: inline-block;
+      line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+    .nav-logo-text span {
+      color: var(--accent);
+    }
+    .nav-menu-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      margin: 0 2rem;
+    }
+    .nav-links-group {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      color: var(--nav-text);
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 0;
+      font-size: 0.95rem;
+      text-decoration: none;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--accent); }
+    .dropdown-container {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+      position: relative;
+    }
+    .dropdown-btn::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: var(--accent);
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+    .dropdown-btn:hover::after, .dropdown-btn.active::after {
+      width: 100%;
+      left: 0;
+    }
+    .dropdown-btn:hover, .dropdown-btn.active { color: var(--accent); }
+    .dropdown-menu {
+      position: absolute;
+      left: -1rem;
+      margin-top: 1rem;
+      width: 220px;
+      background: rgba(17, 17, 17, 0.95);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      transform: translateY(10px);
+      z-index: 60;
+      border: 1px solid rgba(255,212,40,0.2);
+    }
+    .dropdown-container:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dropdown-menu a:first-child { border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .dropdown-menu a:last-child { border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; }
+    .dropdown-menu a:hover, .dropdown-menu a.active { background: rgba(255,212,40,0.1); color: var(--accent); }
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.3s;
+      color: var(--nav-text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .icon-btn:hover { background: var(--accent); color: #000000; border-color: var(--accent); transform: translateY(-2px); }
+    .login-btn {
+      background: var(--accent);
+      color: #000000;
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      box-shadow: 0 4px 15px rgba(255,212,40,0.2);
+    }
+    .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    
+    @media (max-width: 1180px) {
+      .navbar {
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      z-index: 1001;
+    }
+    .hamburger-icon, .close-icon {
+      font-size: 1.8rem;
+      color: var(--nav-text);
+    }
+    .close-icon { display: none; }
+    .mobile-menu-btn.active .hamburger-icon { display: none; }
+    .mobile-menu-btn.active .close-icon { display: block; }
+    
+    .mobile-menu-panel {
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: var(--bg-nav);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      z-index: 999;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    }
+    .mobile-menu-panel.show { max-height: calc(100vh - 80px); overflow-y: auto; }
+    .mobile-menu-inner { padding: 0.5rem 0; }
+    .mobile-nav-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-nav-link {
+      color: var(--nav-text);
+      text-decoration: none;
+      display: block;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link.active { color: var(--accent); background: rgba(255,212,40,0.1); }
+    .mobile-dropdown-item { border-bottom: 1px solid rgba(255,212,40,0.15); }
+    .mobile-dropdown-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .mobile-dropdown-btn:hover { color: var(--accent); }
+    .mobile-dropdown-icon { transition: transform 0.3s ease; }
+    .mobile-dropdown-icon.rotated { transform: rotate(180deg); }
+    .mobile-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.3);
+    }
+    .mobile-submenu.show { max-height: 300px; }
+    .mobile-submenu a {
+      display: block;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      opacity: 0.8;
+      font-size: 0.9rem;
+    }
+    .mobile-submenu a:hover { color: var(--accent); opacity: 1; }
+    .mobile-login-btn {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: var(--accent);
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-theme-rtl {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(255,212,40,0.15);
+      flex-wrap: wrap;
+    }
+    .mobile-icon-btn {
+      background: rgba(255,212,40,0.15);
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      color: var(--nav-text);
+      cursor: pointer;
+    }
+    .mobile-icon-btn:hover { background: var(--accent); color: #000000; }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      padding: 160px 0 80px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .page-header h1 {
+      font-size: 3.5rem;
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    /* Section Styles */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    section {
+      padding: 100px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .section-title {
+      font-size: 2.8rem;
+      font-family: 'Oswald', sans-serif;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      letter-spacing: 1px;
+    }
+    .accent-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem auto 2rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    /* FAQ Categories */
+    .faq-categories {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .category-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.7rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      color: var(--text-secondary);
+    }
+    .category-btn:hover, .category-btn.active {
+      background: var(--accent);
+      color: #000000;
+      border-color: var(--accent);
+    }
+
+    /* FAQ Items */
+    .faq-section {
+      display: none;
+    }
+    .faq-section.active-section {
+      display: block;
+    }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .faq-item:hover {
+      border-color: var(--accent);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.2rem 1.5rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+    .faq-question i {
+      color: var(--accent);
+      transition: transform 0.3s;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      padding: 0 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      border-top: none;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+      padding: 0 1.5rem 1.2rem 1.5rem;
+    }
+    .faq-question.open i {
+      transform: rotate(180deg);
+    }
+
+    /* Quick Help Cards */
+    .help-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .help-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .help-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+    .help-card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .help-card h3 {
+      font-family: 'Oswald', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+    .help-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Still Have Questions Banner */
+    .contact-banner {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border-radius: 28px;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .help-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+      .section-title { font-size: 2.2rem; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+      .page-header h1 { font-size: 2.5rem; }
+      .faq-question { font-size: 0.95rem; padding: 1rem; }
+    }
+    @media (max-width: 1180px) {
+      .nav-menu-container, .nav-buttons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      padding-top: 80px;
+      padding-bottom: 40px;
+      border-top: 1px solid rgba(255,212,40,0.2);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      color: var(--footer-text);
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--footer-text-muted);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-col p { color: var(--footer-text-muted); line-height: 1.6; font-size: 0.85rem; }
+    .footer-logo {
+       font-size: 1.6rem!important;
+      font-weight: 700 !important;
+      color: var(--footer-text) !important;
+      text-decoration: none !important;
+      font-family: 'Oswald', sans-serif;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent) !important; }
+    .social-icons a {
+      display: inline-block;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: var(--footer-text-muted);
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: var(--accent); }
+    .footer-contact-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
+    .footer-copyright {
+      border-top: 1px solid rgba(255,212,40,0.2);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--footer-text-muted);
+      font-size: 0.8rem;
+    }
+    @media (max-width: 1024px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="flex-nav">
+     <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</span></a>
+      <div class="nav-menu-container">
+        <div class="nav-links-group">
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Home <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="index.html">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </div>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="service.html" class="nav-link">Services</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="faq.html" class="nav-link active">Faq</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+          <div class="dropdown-container">
+            <button class="dropdown-btn">Dashboard <i class="fas fa-chevron-down"></i></button>
+            <div class="dropdown-menu">
+              <a href="admin.html">Admin Dashboard</a>
+              <a href="client.html">Client Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-buttons">
+        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="register.html" class="login-btn">Sign up</a>
+        <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+        <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
+      </div>
+      <button id="mobile-menu-btn" class="mobile-menu-btn">
+        <i class="fas fa-bars hamburger-icon"></i>
+        <i class="fas fa-times close-icon"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div id="mobile-menu-panel" class="mobile-menu-panel">
+    <div class="mobile-menu-inner">
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Home <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="index.html">Home 1</a><a href="home2.html">Home 2</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="about.html" class="mobile-nav-link">About</a></div>
+      <div class="mobile-nav-item"><a href="service.html" class="mobile-nav-link">Services</a></div>
+      <div class="mobile-nav-item"><a href="blog.html" class="mobile-nav-link">Blog</a></div>
+      <div class="mobile-nav-item"><a href="faq.html" class="mobile-nav-link active">Faq</a></div>
+      <div class="mobile-nav-item"><a href="contact.html" class="mobile-nav-link">Contact</a></div>
+      <div class="mobile-dropdown-item">
+        <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
+        <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
+      </div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
+      <div class="mobile-theme-rtl">
+        <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
+        <button id="mobile-rtl-toggle" class="mobile-icon-btn"><i class="fas fa-exchange-alt"></i> RTL</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header" style="
+  position: relative;
+  background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
+  url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  padding: 120px 20px;
+  text-align: center;
+  overflow: hidden;
+">
+
+  <div class="container" style="position: relative; z-index: 2; max-width: 900px; margin: auto;">
+    
+    <h1 style="
+      font-size: 3.2rem;
+      color: #ffffff;
+      margin-bottom: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    ">
+      Frequently <span class="text-accent" style="color:#FFD428;">Asked Questions</span>
+    </h1>
+
+    <div class="accent-divider" style="
+      width: 90px;
+      height: 4px;
+      background: #FFD428;
+      margin: 18px auto 25px;
+      border-radius: 10px;
+    "></div>
+
+    <p style="
+      color: rgba(255,255,255,0.92);
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 720px;
+      margin: auto;
+    ">
+      Find quick answers to common questions about our mobile brake repair service, pricing, warranty, and more.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- MAIN FAQ SECTION -->
+<section>
+  <div class="container">
+    <!-- Category Tabs -->
+    <div class="faq-categories">
+      <button class="category-btn active" data-category="general">General Questions</button>
+      <button class="category-btn" data-category="service">Service & Process</button>
+      <button class="category-btn" data-category="pricing">Pricing & Warranty</button>
+      <button class="category-btn" data-category="vehicle">Vehicle & Parts</button>
+    </div>
+
+    <!-- GENERAL QUESTIONS -->
+    <div id="general" class="faq-section active-section">
+      <div class="faq-item">
+        <button class="faq-question">What is mobile brake repair? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Mobile brake repair means our certified technicians come to your location — home, office, or roadside — to perform brake services. We bring a fully equipped van with all necessary tools and parts, so you don't have to tow your vehicle or wait at a shop.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Is BrakeMaster licensed and insured? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Absolutely. BrakeMaster is fully licensed, bonded, and insured. All our technicians are ASE-certified with background checks. We carry comprehensive liability insurance for your peace of mind.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you service all vehicle makes and models? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Yes! We service domestic and imported vehicles including cars, trucks, SUVs, and vans. From Ford and Chevy to Toyota, Honda, BMW, and Mercedes — our technicians are trained on all major brands.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do I schedule an appointment? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">You can schedule online through our website, call our 24/7 hotline at (888) 555-2753, or use our mobile app. Same-day appointments are often available.</div>
+      </div>
+    </div>
+
+    <!-- SERVICE & PROCESS -->
+    <div id="service" class="faq-section">
+      <div class="faq-item">
+        <button class="faq-question">How long does a mobile brake repair take? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Most brake pad and rotor replacements take 60-90 minutes. Complex jobs like caliper replacements may take 2 hours. We provide an estimated time before starting any work.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What happens during a brake inspection? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Our technician will inspect brake pads, rotors, calipers, brake lines, and fluid level. We provide a digital report with photos and a detailed estimate before any work begins.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do I need to be home during the service? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Yes, we recommend you be present for the initial inspection and approval. However, many customers leave their keys with us or use our secure remote access system for office parking lots.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What areas do you serve? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">We operate in over 50 major metropolitan areas nationwide. Enter your zip code on our website to check availability. New cities are added monthly.</div>
+      </div>
+    </div>
+
+    <!-- PRICING & WARRANTY -->
+    <div id="pricing" class="faq-section">
+      <div class="faq-item">
+        <button class="faq-question">How much does brake pad replacement cost? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Brake pad replacement starts at $149 per axle for standard vehicles. Premium ceramic pads range from $199-$249 per axle. This includes parts, labor, and a free brake inspection.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer a warranty on brake repairs? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Yes! All BrakeMaster repairs come with a 12-month / 12,000-mile warranty on parts and labor. We stand behind our work completely.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you provide free estimates? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Absolutely. We offer free brake inspections and upfront written estimates. You'll never pay for a quote or diagnostic.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you offer financing options? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Yes, we partner with financing companies to offer flexible payment plans. Apply online in minutes and get approved for up to $5,000 with zero interest options.</div>
+      </div>
+    </div>
+
+    <!-- VEHICLE & PARTS -->
+    <div id="vehicle" class="faq-section">
+      <div class="faq-item">
+        <button class="faq-question">What type of brake pads do you use? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">We use premium ceramic and semi-metallic pads from leading brands. Ceramic pads offer quieter operation and less dust, while semi-metallic provide superior stopping power for trucks.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How do I know if my rotors need replacement? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Signs include vibration when braking, visible grooves or scoring, and thickness below minimum specification. Our technician will measure rotor thickness and check for warping during inspection.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How often should brakes be replaced? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Brake pads typically last 30,000-70,000 miles depending on driving habits. Rotors can last 50,000-100,000 miles. We recommend a brake inspection every 12,000 miles.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">What is a brake fluid flush and when is it needed? <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">Brake fluid absorbs moisture over time, reducing braking performance. We recommend flushing every 2-3 years or when fluid appears dark/contaminated. It restores pedal feel and prevents corrosion.</div>
+      </div>
+    </div>
+
+    <!-- Quick Help Cards -->
+    <div class="help-grid">
+      <div class="help-card">
+        <i class="fas fa-phone-alt"></i>
+        <h3>24/7 Support</h3>
+        <p>Emergency? Call us anytime</p>
+        <a href="tel:+18885552753" class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">(888) 555-2753</a>
+      </div>
+      <div class="help-card">
+        <i class="fas fa-comment-dots"></i>
+        <h3>Live Chat</h3>
+        <p>Chat with a brake expert</p>
+        <a href="#" class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Start Chat</a>
+      </div>
+      <div class="help-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email Us</h3>
+        <p>Response within 2 hours</p>
+        <a href="mailto:help@brakemaster.com" class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.8rem;">help@brakemaster.com</a>
+      </div>
+    </div>
+
+    <!-- Still Have Questions Banner -->
+    <div class="contact-banner">
+      <h2 class="font-heading" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Still have <span class="text-accent">questions?</span></h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Our brake experts are ready to help you with any additional questions.</p>
+      <a href="contact.html" class="btn-primary"><i class="fas fa-headset"></i> Contact Support</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+      <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+    </div>
+    <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
+  </div>
+</footer>
+
+<script>
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+  const body = document.body;
+  function updateThemeIcon(isDark) {
+    if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    if(mobileThemeToggle) mobileThemeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i> Theme' : '<i class="fas fa-moon"></i> Theme';
+  }
+  function toggleTheme() {
+    if(body.classList.contains('dark')) { body.classList.remove('dark'); localStorage.setItem('theme', 'light'); updateThemeIcon(false); }
+    else { body.classList.add('dark'); localStorage.setItem('theme', 'dark'); updateThemeIcon(true); }
+  }
+  if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); updateThemeIcon(true); }
+  else updateThemeIcon(false);
+  if(themeToggle) themeToggle.addEventListener('click', toggleTheme);
+  if(mobileThemeToggle) mobileThemeToggle.addEventListener('click', toggleTheme);
+  
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const mobileRtlToggle = document.getElementById('mobile-rtl-toggle');
+  const htmlEl = document.documentElement;
+  function toggleRTL() { if(htmlEl.getAttribute('dir') === 'rtl') { htmlEl.removeAttribute('dir'); localStorage.setItem('direction', 'ltr'); } else { htmlEl.setAttribute('dir', 'rtl'); localStorage.setItem('direction', 'rtl'); } }
+  if(rtlToggle) rtlToggle.addEventListener('click', toggleRTL);
+  if(mobileRtlToggle) mobileRtlToggle.addEventListener('click', toggleRTL);
+  if(localStorage.getItem('direction') === 'rtl') htmlEl.setAttribute('dir', 'rtl');
+  
+  // Mobile Menu
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobilePanel = document.getElementById('mobile-menu-panel');
+  function toggleMobile() { mobilePanel.classList.toggle('show'); mobileBtn.classList.toggle('active'); document.body.style.overflow = mobilePanel.classList.contains('show') ? 'hidden' : ''; }
+  if(mobileBtn) mobileBtn.addEventListener('click', toggleMobile);
+  document.querySelectorAll('.mobile-nav-link, .mobile-login-btn').forEach(link => { link.addEventListener('click', () => { if(mobilePanel.classList.contains('show')) toggleMobile(); }); });
+  
+  // Mobile Dropdowns
+  document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const submenu = this.nextElementSibling;
+      const icon = this.querySelector('.mobile-dropdown-icon');
+      document.querySelectorAll('.mobile-submenu').forEach(menu => { if(menu !== submenu) menu.classList.remove('show'); });
+      document.querySelectorAll('.mobile-dropdown-icon').forEach(i => { if(i !== icon) i.classList.remove('rotated'); });
+      if(submenu) { submenu.classList.toggle('show'); icon.classList.toggle('rotated'); }
+    });
+  });
+  
+  // FAQ Category Switching
+  const categoryBtns = document.querySelectorAll('.category-btn');
+  const faqSections = document.querySelectorAll('.faq-section');
+  
+  categoryBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-category');
+      categoryBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      faqSections.forEach(section => {
+        section.classList.remove('active-section');
+        if(section.id === category) {
+          section.classList.add('active-section');
+        }
+      });
+    });
+  });
+  
+  // FAQ Accordion
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const answer = question.nextElementSibling;
+      const icon = question.querySelector('i');
+      answer.classList.toggle('open');
+      question.classList.toggle('open');
+      if(icon) {
+        icon.style.transform = answer.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+    });
+  });
+  
+  window.addEventListener('resize', () => { if(window.innerWidth > 1180 && mobilePanel?.classList.contains('show')) toggleMobile(); });
+</script>
+</body>
+</html>
