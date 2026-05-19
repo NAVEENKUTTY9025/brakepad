@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFD428'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 13c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z'/%3E%3C/svg%3E">
     <title>BrakeMaster | Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -303,25 +306,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</a>
+                <a href="index.html" class="nav-logo-text"><span>BRAKE MASTER</span></a>
             </div>
 
             <!-- Right Side Controls -->
             <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                <button id="rtl-toggle" class="icon-btn" title="RTL Mode">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-width="2" d="M12 3a9 9 0 100 18 9 9 0 000-18zm0 0c2.5 2.8 2.5 12.2 0 15m0-15c-2.5 2.8-2.5 12.2 0 15M3 12h18" />
-                    </svg>
-                </button>
-
-                <button id="theme-toggle" class="icon-btn" title="Dark/Light Mode">
-                    <svg class="w-5 h-5 light-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
-                    <svg class="w-5 h-5 dark-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                    </svg>
-                </button>
+                <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
+                <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
 
                 <!-- Admin Profile Badge -->
                
@@ -596,14 +587,14 @@
 
             // Theme Toggle
             const themeToggle = document.getElementById('theme-toggle');
-            const lightIcons = document.querySelectorAll('.light-icon');
-            const darkIcons = document.querySelectorAll('.dark-icon');
+            function updateThemeIcon(isDark) {
+                if(themeToggle) themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
             function setTheme(theme) {
                 htmlEl.setAttribute('data-theme', theme);
                 localStorage.setItem('theme', theme);
-                lightIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'dark'));
-                darkIcons.forEach(icon => icon.classList.toggle('hidden', theme === 'light'));
                 document.body.classList.toggle('dark', theme === 'dark');
+                updateThemeIcon(theme === 'dark');
             }
             const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
