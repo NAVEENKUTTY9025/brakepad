@@ -487,7 +487,7 @@
       transform: translateY(-6px);
       box-shadow: var(--shadow);
     }
-    .contact-card i {
+    .contact-card > i {
       font-size: 2.8rem;
       color: var(--accent);
       margin-bottom: 1.2rem;
@@ -496,12 +496,12 @@
       font-family: 'Oswald', sans-serif;
       margin-bottom: 0.8rem;
     }
-    .contact-card a {
+    .contact-card a:not(.btn-primary) {
       color: var(--text-secondary);
       text-decoration: none;
       transition: color 0.3s;
     }
-    .contact-card a:hover {
+    .contact-card a:not(.btn-primary):hover {
       color: var(--accent);
     }
     /* Contact Form */
