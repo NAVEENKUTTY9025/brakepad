@@ -297,6 +297,20 @@
       box-shadow: 0 4px 15px rgba(255,212,40,0.2);
     }
     .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
     @media (max-width: 1180px) {
       .navbar {
@@ -390,6 +404,18 @@
       color: #000000;
       padding: 0.75rem 1.5rem;
       border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
       text-decoration: none;
       font-weight: 700;
       text-align: center;
@@ -748,9 +774,9 @@
       display: flex;
       gap: 12px;
       margin-bottom: 12px;
-      align-items: flex-start;
+      align-items: center;
     }
-    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
     .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
     .footer-copyright {
       border-top: 1px solid rgba(255,212,40,0.2);
@@ -797,7 +823,7 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
         <a href="register.html" class="login-btn">Sign up</a>
         <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
         <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
@@ -824,7 +850,7 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
       <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
@@ -838,7 +864,7 @@
 <div class="page-header" style="
   position: relative;
   background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
-  url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  url('https://images.unsplash.com/photo-1498887960847-2a5e46312788?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
   padding: 120px 20px;
   text-align: center;
   overflow: hidden;
@@ -887,7 +913,7 @@
         <!-- Featured Post -->
         <div class="featured-post">
           <div class="featured-grid">
-            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&auto=format" alt="Featured brake repair guide" class="featured-img">
+            <img src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=800&auto=format&fit=crop" alt="Featured brake repair guide" class="featured-img">
             <div class="featured-content">
               <span class="featured-badge"><i class="fas fa-star"></i> FEATURED</span>
               <h2>Complete Guide to Brake Pad Replacement: When, Why & How</h2>
@@ -900,7 +926,7 @@
 
         <!-- Blog Post 1 -->
         <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format" alt="Signs of brake rotor wear" class="blog-img">
+          <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&auto=format&fit=crop" alt="Signs of brake rotor wear" class="blog-img">
           <div class="blog-content">
             <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 10, 2026</span><span><i class="fas fa-tag"></i> Maintenance</span></div>
             <h2><a href="#">5 Signs Your Rotors Need Replacement Immediately</a></h2>
@@ -911,7 +937,7 @@
 
         <!-- Blog Post 2 -->
         <div class="blog-card">
-          <img src="images/ho1.jpg" alt="Mobile brake repair benefits" class="blog-img">
+          <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop" alt="Mobile brake repair benefits" class="blog-img">
           <div class="blog-content">
             <div class="blog-meta"><span><i class="fas fa-calendar"></i> March 5, 2026</span><span><i class="fas fa-tag"></i> Mobile Service</span></div>
             <h2><a href="#">Why Mobile Brake Repair is Better Than the Dealership</a></h2>
@@ -922,7 +948,7 @@
 
         <!-- Blog Post 3 -->
         <div class="blog-card">
-          <img src="images/b1.webp" alt="Brake fluid maintenance" class="blog-img">
+          <img src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop" alt="Brake fluid maintenance" class="blog-img">
           <div class="blog-content">
             <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 28, 2026</span><span><i class="fas fa-tag"></i> Safety</span></div>
             <h2><a href="#">The Importance of Regular Brake Fluid Flushes</a></h2>
@@ -933,7 +959,7 @@
 
         <!-- Blog Post 4 -->
         <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&auto=format" alt="Seasonal brake care" class="blog-img">
+          <img src="https://images.unsplash.com/photo-1444312645910-faa973817bf3?w=800&auto=format&fit=crop" alt="Seasonal brake care" class="blog-img">
           <div class="blog-content">
             <div class="blog-meta"><span><i class="fas fa-calendar"></i> February 20, 2026</span><span><i class="fas fa-tag"></i> Seasonal Tips</span></div>
             <h2><a href="#">Winter vs Summer: How Seasons Affect Your Brakes</a></h2>
@@ -979,21 +1005,21 @@
         <div class="sidebar-widget">
           <h3>Recent Posts</h3>
           <div class="recent-post">
-            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=150&auto=format" alt="Recent post">
+            <img src="https://images.unsplash.com/photo-1563720225603-518880629402?w=150&auto=format&fit=crop" alt="Recent post">
             <div class="recent-post-info">
               <h4><a href="#">How to Choose Between Ceramic and Semi-Metallic Brake Pads</a></h4>
               <span><i class="fas fa-calendar"></i> March 12, 2026</span>
             </div>
           </div>
           <div class="recent-post">
-            <img src="images/ho1.jpg" alt="Recent post">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=150&auto=format&fit=crop" alt="Recent post">
             <div class="recent-post-info">
               <h4><a href="#">10 Questions to Ask Before Hiring a Mobile Brake Service</a></h4>
               <span><i class="fas fa-calendar"></i> March 8, 2026</span>
             </div>
           </div>
           <div class="recent-post">
-            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=150&auto=format" alt="Recent post">
+            <img src="https://images.unsplash.com/photo-1583267746897-ea908c659736?w=150&auto=format&fit=crop" alt="Recent post">
             <div class="recent-post-info">
               <h4><a href="#">Understanding Brake Noise: Squeaks, Grinds & Scrapes Explained</a></h4>
               <span><i class="fas fa-calendar"></i> March 1, 2026</span>
@@ -1013,7 +1039,7 @@
 
         <!-- Contact CTA -->
         <div class="sidebar-widget" style="background: var(--accent); color: #000000; text-align: center;">
-          <i class="fas fa-phone-alt" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+          <i class="fas fa-phone" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
           <h3 style="color: #000000;">Need Brake Help?</h3>
           <p style="color: #000000;">Call our experts 24/7</p>
           <a href="tel:+18885552753" style="font-size: 1.5rem; font-weight: 700; color: #000000; text-decoration: none;">(888) 555-2753</a>
@@ -1031,7 +1057,7 @@
       <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
       <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
       <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
-      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
     </div>
     <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
   </div>

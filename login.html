@@ -61,11 +61,11 @@
       color: var(--text-primary);
       transition: background-color 0.3s ease, color 0.3s ease;
       min-height: 100vh;
-      height: 100vh;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
 
     /* Top Bar - Logo left, toggles right */
@@ -123,7 +123,7 @@
     .login-container {
       width: 100%;
       max-width: 460px;
-      margin: 0 auto;
+      margin: auto;
       padding: 0 1.5rem;
     }
 
@@ -317,6 +317,7 @@
     }
     .social-btn i.fa-google { color: #DB4437; }
     .social-btn i.fa-facebook-f { color: #4267B2; }
+    .social-btn i.fa-apple { color: var(--text-primary); }
 
     /* Sign Up Link */
     .signup-link {
@@ -368,17 +369,28 @@
         padding: 1rem 1.5rem;
       }
       .logo {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
       .icon-btn {
         width: 36px;
         height: 36px;
       }
+      body {
+        align-items: flex-start;
+      }
+      .login-container {
+        margin-top: 80px;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+      }
       .login-card {
-        padding: 1.8rem;
+        padding: 1.5rem 1.2rem;
       }
       .login-header h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+      }
+      .social-login {
+        gap: 0.5rem;
       }
       .social-btn span {
         display: none;
@@ -461,6 +473,10 @@
       <button class="social-btn" id="facebookLogin">
         <i class="fab fa-facebook-f"></i>
         <span>Facebook</span>
+      </button>
+      <button class="social-btn" id="appleLogin">
+        <i class="fab fa-apple"></i>
+        <span>Apple</span>
       </button>
     </div>
 
@@ -579,6 +595,7 @@
   // Social login simulations
   const googleBtn = document.getElementById('googleLogin');
   const facebookBtn = document.getElementById('facebookLogin');
+  const appleBtn = document.getElementById('appleLogin');
   
   if(googleBtn) {
     googleBtn.addEventListener('click', function() {
@@ -593,6 +610,16 @@
   if(facebookBtn) {
     facebookBtn.addEventListener('click', function() {
       showAlert('Facebook login demo. Redirecting...', 'success');
+      setTimeout(() => {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'client.html';
+      }, 1000);
+    });
+  }
+  
+  if(appleBtn) {
+    appleBtn.addEventListener('click', function() {
+      showAlert('Apple login demo. Redirecting...', 'success');
       setTimeout(() => {
         localStorage.setItem('isLoggedIn', 'true');
         window.location.href = 'client.html';

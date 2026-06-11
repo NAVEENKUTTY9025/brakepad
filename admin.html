@@ -178,17 +178,19 @@
             pointer-events: auto;
         }
 
-        /* Navbar styles */
+        /* Navbar styles - Dashboard specific */
         .navbar {
-            background: var(--color-nav-bg);
-            border-bottom: 1px solid rgba(255,212,40,0.2);
+            background: var(--color-card-bg);
+            border-bottom: 1px solid var(--color-border);
         }
         .nav-logo-text {
             font-size: 1.6rem !important;
             font-weight: 700 !important;
-            color: var(--color-nav-text);
+            color: var(--color-primary-text);
             text-decoration: none;
             letter-spacing: -0.5px;
+            display: inline-block;
+            line-height: 1;
             font-family: 'Oswald', system-ui, sans-serif;
         }
         .nav-logo-text span {
@@ -198,18 +200,19 @@
             width: 40px;
             height: 40px;
             border-radius: 999px;
-            background: rgba(255,212,40,0.15);
+            background: var(--color-stat-card);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: 0.2s;
-            color: var(--color-nav-text);
-            border: 1px solid rgba(255,212,40,0.3);
+            color: var(--color-primary-text);
+            border: 1px solid var(--color-border);
         }
         .icon-btn:hover {
-            background: var(--color-accent);
-            color: #000000;
+            background: var(--color-hover);
+            color: var(--color-accent);
+            border-color: var(--color-accent);
         }
 
         /* Mobile Menu Button */
@@ -227,8 +230,8 @@
         .mobile-menu-icon {
             width: 24px;
             height: 24px;
-            color: var(--color-nav-text);
-            stroke: var(--color-nav-text);
+            color: var(--color-primary-text);
+            stroke: var(--color-primary-text);
         }
 
         /* Badge Styles */

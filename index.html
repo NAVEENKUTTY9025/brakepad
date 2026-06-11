@@ -299,6 +299,20 @@
       box-shadow: 0 4px 15px rgba(255,212,40,0.2);
     }
     .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
     @media (max-width: 1180px) {
       .navbar {
@@ -392,6 +406,18 @@
       color: #000000;
       padding: 0.75rem 1.5rem;
       border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
       text-decoration: none;
       font-weight: 700;
       text-align: center;
@@ -491,6 +517,13 @@
       border-radius: 20px;
     }
     .card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: var(--shadow); }
+    .service-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
     .card-icon { font-size: 2.8rem; color: var(--accent); margin-bottom: 1.5rem; }
     .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.8rem; }
     .step-item { background: var(--bg-card); padding: 1.8rem; text-align: center; border-bottom: 3px solid var(--accent); border-radius: 16px; transition: 0.3s; }
@@ -578,9 +611,9 @@
       display: flex;
       gap: 12px;
       margin-bottom: 12px;
-      align-items: flex-start;
+      align-items: center;
     }
-    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
     .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
     .footer-contact-item a:hover { color: var(--accent); }
     .footer-copyright {
@@ -649,7 +682,7 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
         <a href="register.html" class="login-btn">Sign up</a>
         <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
         <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
@@ -676,7 +709,7 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
       <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
@@ -690,7 +723,7 @@
 <section class="hero">
   <div class="hero-container">
     <div class="hero-content">
-      <h1 class="font-heading" style="font-size: 4rem; margin-bottom:1.5rem;">Mobile <span class="text-accent">Brake Repair</span><br>& Rotor Replacement</h1>
+      <h1 class="font-heading" style="font-size: clamp(2.5rem, 8vw, 4rem); line-height: 1.1; margin-bottom:1.5rem;">Mobile <span class="text-accent">Brake Repair<br>& Rotor Replacement</span></h1>
       <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem;">On-site service at your location. Certified techs, premium parts, and warranty included. Free brake inspection.</p>
       <div style="display:flex; gap:1rem; flex-wrap:wrap;">
         <a href="#" class="btn-primary"><i class="fas fa-wrench"></i> Book Mobile Service</a>
@@ -715,9 +748,24 @@
     <div class="accent-divider"></div>
     <p class="section-sub">Complete brake care delivered to your doorstep. Fast, reliable, transparent.</p>
     <div class="grid-3">
-      <div class="card"><div class="card-icon"><i class="fas fa-sliders-h"></i></div><h3 class="text-accent">Brake Pad Replacement</h3><p>Ceramic & semi-metallic pads. Reduced noise, longer life. We come to you.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Starting $149</div></div>
-      <div class="card"><div class="card-icon"><i class="fas fa-cog"></i></div><h3 class="text-accent">Rotor Replacement</h3><p>Eliminate brake pulsation. Premium rotors with anti-corrosion coating.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Free Diagnostic</div></div>
-      <div class="card"><div class="card-icon"><i class="fas fa-oil-can"></i></div><h3 class="text-accent">Caliper Service</h3><p>Caliper rebuild, brake fluid flush & bleeding. Restore performance.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Same-Day</div></div>
+      <div class="card">
+        <img src="images/h25.jpg" alt="Brake Pad Replacement" class="service-img">
+        <h3 class="text-accent">Brake Pad Replacement</h3>
+        <p>Ceramic & semi-metallic pads. Reduced noise, longer life. We come to you.</p>
+        <div class="text-accent" style="margin-top:1rem; font-weight:600;">Starting $149</div>
+      </div>
+      <div class="card">
+        <img src="images/h23.jpg" alt="Rotor Replacement" class="service-img">
+        <h3 class="text-accent">Rotor Replacement</h3>
+        <p>Eliminate brake pulsation. Premium rotors with anti-corrosion coating.</p>
+        <div class="text-accent" style="margin-top:1rem; font-weight:600;">Starting $199</div>
+      </div>
+      <div class="card">
+        <img src="images/h24.jpg" alt="Caliper Service" class="service-img">
+        <h3 class="text-accent">Caliper Service</h3>
+        <p>Caliper rebuild, brake fluid flush & bleeding. Restore performance.</p>
+        <div class="text-accent" style="margin-top:1rem; font-weight:600;">Same-Day</div>
+      </div>
     </div>
   </div>
 </section>
@@ -734,7 +782,7 @@
       <div class="step-item"><i class="fas fa-receipt" style="font-size:2rem; color:var(--accent);"></i><h3>Upfront Pricing</h3><p>No hidden fees</p></div>
     </div>
     <div style="margin-top: 3rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);">
-      <img src="images/ho1.jpg" alt="Mobile brake repair van and certified mechanic" style="width:100%; height:auto; display:block;">
+      <img src="https://images.unsplash.com/photo-1635425661603-57c2c9d8ab87?w=1400&auto=format&fit=crop&q=80" alt="Mobile brake repair van and certified mechanic" style="width:100%; height:auto; display:block;">
     </div>
   </div>
 </section>
@@ -764,7 +812,7 @@
       <div class="step-item"><i class="fas fa-thumbs-up" style="font-size:2rem; color:var(--accent);"></i><h3>4. Test Drive</h3><p>Quality assured</p></div>
     </div>
     <div style="margin-top: 3rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);">
-      <img src="images/ho2.webp" alt="Mechanic replacing brake pads on mobile service van" style="width:100%; height:auto; display:block;">
+      <img src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?w=1400&auto=format" alt="Mechanic replacing brake pads on mobile service van" style="width:100%; height:auto; display:block;">
     </div>
   </div>
 </section>
@@ -779,7 +827,7 @@
       <div class="faq-item"><button class="faq-question">Do you offer warranty on parts? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">Yes, 12-month / 12,000-mile warranty on all brake parts and labor.</div></div>
       <div class="faq-item"><button class="faq-question">What areas do you serve? <i class="fas fa-chevron-down text-accent"></i></button><div class="faq-answer">We cover all major metro areas. Enter your zip code online for instant availability.</div></div>
     </div>
-    <div class="cta-banner"><h3 class="font-heading" style="font-size:2rem;">Emergency Brake Service? <span class="text-accent">Call Now</span></h3><p style="margin:1rem 0; color: var(--text-secondary);">Free estimate over the phone. Mobile service arrives within 2 hours.</p><a href="#" class="btn-primary"><i class="fas fa-phone-alt"></i> (888) 555-BRAKE</a></div>
+    <div class="cta-banner"><h3 class="font-heading" style="font-size:2rem;">Emergency Brake Service? <span class="text-accent">Call Now</span></h3><p style="margin:1rem 0; color: var(--text-secondary);">Free estimate over the phone. Mobile service arrives within 2 hours.</p><a href="#" class="btn-primary"><i class="fas fa-phone"></i> (888) 555-BRAKE</a></div>
   </div>
 </section>
 
@@ -790,7 +838,7 @@
       <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
       <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
       <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
-      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
     </div>
     <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
   </div>

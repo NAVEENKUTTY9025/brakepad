@@ -294,6 +294,20 @@
       box-shadow: 0 4px 15px rgba(255,212,40,0.2);
     }
     .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
     @media (max-width: 1180px) {
       .navbar {
@@ -387,6 +401,18 @@
       color: #000000;
       padding: 0.75rem 1.5rem;
       border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
       text-decoration: none;
       font-weight: 700;
       text-align: center;
@@ -605,9 +631,9 @@
       display: flex;
       gap: 12px;
       margin-bottom: 12px;
-      align-items: flex-start;
+      align-items: center;
     }
-    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
     .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
     .footer-copyright {
       border-top: 1px solid rgba(255,212,40,0.2);
@@ -654,7 +680,7 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
         <a href="register.html" class="login-btn">Sign up</a>
         <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
         <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
@@ -681,7 +707,7 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
       <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
@@ -691,24 +717,134 @@
   </div>
 </nav>
 
+<style>
+  /* Home 2 Custom Styles for Professional Layout */
+  .hero-alt {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url('https://images.unsplash.com/photo-1493238792000-8113da705763?w=1600&auto=format&fit=crop&q=80') center/cover no-repeat;
+    padding-top: 80px;
+  }
+  .hero-alt::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+  }
+  .hero-alt-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 1.5rem;
+  }
+  .hero-alt-content h1 { color: #FFFFFF; font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+  .hero-alt-content p { color: #E0E0E0; font-size: 1.25rem; margin-bottom: 2.5rem; }
+  
+  .zigzag-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 6rem;
+  }
+  .zigzag-row.reverse { flex-direction: row-reverse; }
+  .zigzag-content { flex: 1; }
+  .zigzag-image { flex: 1; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md); }
+  .zigzag-image img { width: 100%; height: 400px; object-fit: cover; display: block; }
+  
+  .grid-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .grid-2x2-item {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .grid-2x2-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+  }
+  .grid-2x2-icon {
+    width: 50px; height: 50px;
+    background: rgba(255,212,40,0.1);
+    color: var(--accent);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-split {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+  }
+  .feature-split-img { flex: 1; border-radius: 24px; overflow: hidden; }
+  .feature-split-img img { width: 100%; height: 600px; object-fit: cover; }
+  .feature-list { flex: 1; }
+  .feature-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+  }
+  .feature-item-icon {
+    width: 60px; height: 60px;
+    background: rgba(255,212,40,0.1);
+    color: var(--accent);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+  
+  .featured-testimonial {
+    background: var(--accent);
+    color: #000000;
+    border-radius: 24px;
+    padding: 4rem;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    box-shadow: 0 20px 40px rgba(255,212,40,0.2);
+  }
+  
+  @media (max-width: 992px) {
+    .zigzag-row, .zigzag-row.reverse, .feature-split { flex-direction: column; gap: 2rem; }
+    .hero-alt-content h1 { font-size: 3rem; }
+  }
+  @media (max-width: 768px) {
+    .grid-2x2 { grid-template-columns: 1fr; gap: 1.5rem; }
+    .featured-testimonial { padding: 2rem; }
+  }
+</style>
+
 <!-- SECTION 1: HERO -->
-<section class="hero">
-  <div class="hero-container">
-    <div class="hero-content">
-      <h1 class="font-heading" style="font-size: 4rem; margin-bottom:1.5rem;">Quality <span class="text-accent">Brake Service</span><br>Wherever You Are</h1>
-      <p style="color: var(--text-secondary); font-size:1.1rem; margin-bottom:2rem;">Mobile brake repair, rotor replacement, and complete brake service delivered to your location. Certified technicians, premium parts, warranty included.</p>
-      <div style="display:flex; gap:1rem; flex-wrap:wrap;">
-        <a href="#" class="btn-primary"><i class="fas fa-wrench"></i> Schedule Service</a>
-        <a href="service.html" class="btn-outline">View Services <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div style="margin-top: 2rem; display: flex; gap: 1.5rem; flex-wrap:wrap;">
-        <span><i class="fas fa-check-circle text-accent"></i> 24/7 Mobile Support</span>
-        <span><i class="fas fa-shield-alt text-accent"></i> 12-Month Warranty</span>
-        <span><i class="fas fa-tachometer-alt text-accent"></i> Free Brake Check</span>
-      </div>
+<section class="hero-alt">
+  <div class="hero-alt-content">
+    <h1 class="font-heading">Premium <span class="text-accent">Brake & Rotor Service</span> Delivered to You</h1>
+    <p>Professional, certified mobile brake repair that comes to your home or office. Experience transparent pricing, top-tier parts, and a standard 12-month warranty without ever stepping foot in a repair shop.</p>
+    <div style="display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap;">
+      <a href="#" class="btn-primary" style="font-size: 1rem; padding: 1rem 2.5rem;"><i class="fas fa-calendar-check"></i> Book Appointment Now</a>
+      <a href="service.html" class="btn-outline" style="color:#FFF; border-color:#FFF; font-size: 1rem; padding: 1rem 2.5rem;"><i class="fas fa-info-circle"></i> Explore Services</a>
     </div>
-    <div class="hero-image">
-      <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&auto=format" alt="Mobile brake repair technician working on car brakes" loading="eager">
+    <div style="margin-top: 3rem; display: flex; gap: 2rem; justify-content:center; flex-wrap:wrap; color:#FFF; font-weight:500;">
+      <span><i class="fas fa-star text-accent"></i> 4.9/5 Average Rating</span>
+      <span><i class="fas fa-shield-alt text-accent"></i> 15K+ Vehicles Serviced</span>
     </div>
   </div>
 </section>
@@ -716,60 +852,124 @@
 <!-- SECTION 2: SERVICES OVERVIEW -->
 <section>
   <div class="container">
-    <h2 class="section-title">Our <span class="text-accent">Brake Services</span></h2>
+    <h2 class="section-title">Professional <span class="text-accent">Solutions</span></h2>
     <div class="accent-divider"></div>
-    <p class="section-sub">Professional mobile brake solutions with transparent pricing and premium parts.</p>
-    <div class="services-grid">
-      <div class="service-card"><i class="fas fa-sliders-h"></i><h3>Brake Pad Replacement</h3><p>Premium ceramic & semi-metallic pads. Reduced noise, longer life.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Starting $149</div></div>
-      <div class="service-card"><i class="fas fa-cog"></i><h3>Rotor Replacement</h3><p>Premium rotors with anti-corrosion coating. Eliminate brake pulsation.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Free Diagnostic</div></div>
-      <div class="service-card"><i class="fas fa-oil-can"></i><h3>Caliper Service</h3><p>Caliper rebuild, brake fluid flush & bleeding. Restore performance.</p><div class="text-accent" style="margin-top:1rem; font-weight:600;">Same-Day</div></div>
+    
+    <div class="zigzag-row">
+      <div class="zigzag-image">
+        <img src="https://images.unsplash.com/photo-1563720360172-67b8f3dce741?w=800&auto=format&fit=crop" alt="Brake Pad Replacement">
+      </div>
+      <div class="zigzag-content">
+        <h3 class="font-heading" style="font-size: 2rem; margin-bottom:1rem;">Advanced <span class="text-accent">Brake Pad Replacement</span></h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">We use only premium ceramic and semi-metallic pads designed for reduced dust, virtually zero noise, and extended longevity. Our mobile units bring the entire pad replacement process directly to your driveway.</p>
+        <ul style="list-style:none; margin-bottom: 2rem; color: var(--text-secondary);">
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Advanced Ceramic Technology</li>
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Reduced Brake Dust</li>
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Quiet, Smooth Stopping Power</li>
+        </ul>
+        <a href="#" class="btn-outline">Starting at $149 <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    
+    <div class="zigzag-row reverse">
+      <div class="zigzag-image">
+        <img src="https://images.unsplash.com/photo-1596700049283-7521e8e2c695?w=800&auto=format&fit=crop" alt="Rotor Replacement">
+      </div>
+      <div class="zigzag-content">
+        <h3 class="font-heading" style="font-size: 2rem; margin-bottom:1rem;">Precision <span class="text-accent">Rotor Replacement</span></h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">Eliminate steering wheel vibration and brake pulsation. We install premium coated rotors that resist corrosion and provide perfectly flat surfaces for optimal pad contact and maximum stopping performance.</p>
+        <ul style="list-style:none; margin-bottom: 2rem; color: var(--text-secondary);">
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Anti-Corrosion Coating</li>
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Restores Factory Smoothness</li>
+          <li style="margin-bottom:0.5rem;"><i class="fas fa-check text-accent" style="margin-right:10px;"></i> Exact OEM Fitment</li>
+        </ul>
+        <a href="#" class="btn-outline">Starting at $199 <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 3: WHY CHOOSE US (HD IMAGE) -->
+<!-- SECTION 3: WHY CHOOSE US (SIDE-BY-SIDE) -->
 <section style="background: var(--bg-secondary);">
   <div class="container">
-    <h2 class="section-title">Why <span class="text-accent">Drivers Choose Us</span></h2>
-    <div class="accent-divider"></div>
-    <div class="stats-grid">
-      <div><div class="stat-number">15K+</div><p>Brake Repairs</p></div>
-      <div><div class="stat-number">4.9★</div><p>Customer Rating</p></div>
-      <div><div class="stat-number">50+</div><p>Mobile Vans</p></div>
-      <div><div class="stat-number">24/7</div><p>Support</p></div>
-    </div>
-    <div style="margin-top: 3rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md);">
-      <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&auto=format" alt="BrakeMaster mobile service van" style="width:100%; height:auto; display:block;">
+    <div class="feature-split">
+      <div class="feature-list">
+        <h2 class="section-title" style="text-align: left;">Why <span class="text-accent">Choose BrakeMaster</span></h2>
+        <div class="accent-divider" style="margin: 0.8rem 0 3rem 0;"></div>
+        
+        <div class="feature-item">
+          <div class="feature-item-icon"><i class="fas fa-home"></i></div>
+          <div>
+            <h4 class="font-heading" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Ultimate Convenience</h4>
+            <p style="color: var(--text-secondary);">We turn your driveway or office parking lot into a professional garage. Save hours of your day by avoiding the repair shop waiting room.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-icon"><i class="fas fa-award"></i></div>
+          <div>
+            <h4 class="font-heading" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Certified Mechanics</h4>
+            <p style="color: var(--text-secondary);">Every technician is fully vetted, insured, and highly experienced. Over 15,000 successful brake repairs under our belt.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-item-icon"><i class="fas fa-tags"></i></div>
+          <div>
+            <h4 class="font-heading" style="font-size: 1.4rem; margin-bottom: 0.5rem;">Transparent Pricing</h4>
+            <p style="color: var(--text-secondary);">What you see is what you pay. We provide a guaranteed upfront quote with absolutely no hidden fees or upcharges.</p>
+          </div>
+        </div>
+      </div>
+      <div class="feature-split-img">
+        <img src="https://images.unsplash.com/photo-1635425661603-57c2c9d8ab87?w=1000&auto=format&fit=crop" alt="BrakeMaster certified mechanic">
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 4: HOW IT WORKS -->
+<!-- SECTION 4: HOW IT WORKS (TIMELINE) -->
 <section>
   <div class="container">
-    <h2 class="section-title">How It <span class="text-accent">Works</span></h2>
+    <h2 class="section-title">The <span class="text-accent">Process</span></h2>
     <div class="accent-divider"></div>
-    <div class="services-grid">
-      <div class="service-card"><i class="fas fa-calendar-alt"></i><h3>1. Book Online</h3><p>Schedule in 60 seconds. Choose your location & time.</p></div>
-      <div class="service-card"><i class="fas fa-truck"></i><h3>2. We Arrive</h3><p>Certified tech comes fully equipped to your location.</p></div>
-      <div class="service-card"><i class="fas fa-clipboard-list"></i><h3>3. Free Inspection</h3><p>Digital report & upfront estimate before any work.</p></div>
-      <div class="service-card"><i class="fas fa-wrench"></i><h3>4. Get Repaired</h3><p>Quality service with 12-month warranty.</p></div>
-    </div>
-    <div style="margin-top: 2rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md);">
-      <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200&auto=format" alt="Mechanic working on brake repair" style="width:100%; height:auto; display:block;">
+    <p class="section-sub">Four simple steps to get you back on the road safely.</p>
+    
+    <div class="grid-2x2">
+      <div class="grid-2x2-item">
+        <div class="grid-2x2-icon"><i class="fas fa-laptop"></i></div>
+        <h3 class="font-heading" style="margin-bottom: 0.5rem;">Step 1: Get an Instant Quote</h3>
+        <p style="color: var(--text-secondary);">Enter your vehicle details online and receive a transparent, upfront price instantly. No obligations.</p>
+      </div>
+      <div class="grid-2x2-item">
+        <div class="grid-2x2-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h3 class="font-heading" style="margin-bottom: 0.5rem;">Step 2: Schedule Service</h3>
+        <p style="color: var(--text-secondary);">Choose a date, time, and location that works perfectly for your schedule. Home or office.</p>
+      </div>
+      <div class="grid-2x2-item">
+        <div class="grid-2x2-icon"><i class="fas fa-truck-pickup"></i></div>
+        <h3 class="font-heading" style="margin-bottom: 0.5rem;">Step 3: We Arrive & Inspect</h3>
+        <p style="color: var(--text-secondary);">Our certified tech arrives fully equipped, performs a free physical inspection, and verifies the required repairs.</p>
+      </div>
+      <div class="grid-2x2-item">
+        <div class="grid-2x2-icon"><i class="fas fa-tools"></i></div>
+        <h3 class="font-heading" style="margin-bottom: 0.5rem;">Step 4: Professional Repair</h3>
+        <p style="color: var(--text-secondary);">We replace your brakes using premium parts, perform a thorough test drive, and hand you the keys.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 5: TESTIMONIALS -->
-<section style="background: var(--bg-secondary);">
+<!-- SECTION 5: FEATURED TESTIMONIAL -->
+<section style="background: var(--bg-primary);">
   <div class="container">
-    <h2 class="section-title">What Our <span class="text-accent">Customers Say</span></h2>
-    <div class="accent-divider"></div>
-    <div class="testimonial-grid">
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"BrakeMaster came to my office and replaced my rotors in under an hour. Super convenient!"</p><h4>— Michael T.</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"Saved me $300 compared to the dealership. Great communication and fast work."</p><h4>— Sarah J.</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
-      <div class="testimonial-card"><i class="fas fa-quote-left text-accent"></i><p style="margin:1rem 0;">"They diagnosed a sticky caliper and fixed it on the spot. Highly recommend."</p><h4>— David R.</h4><div><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i><i class="fas fa-star text-accent"></i></div></div>
+    <div class="featured-testimonial">
+      <i class="fas fa-quote-left" style="font-size: 3rem; opacity: 0.3; margin-bottom: 1.5rem; display: block;"></i>
+      <h2 class="font-heading" style="font-size: 2.5rem; margin-bottom: 2rem; line-height: 1.3;">
+        "I was dreading spending my Saturday at a repair shop. BrakeMaster came to my house while I was working from home. They were professional, completely transparent, and my brakes feel brand new. I'll never go to a shop again."
+      </h2>
+      <div style="font-size: 1.2rem; font-weight: 700;">— Sarah Jenkins, Verified Customer</div>
+      <div style="margin-top: 1rem; font-size: 1.2rem;">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
     </div>
   </div>
 </section>
@@ -778,11 +978,11 @@
 <section>
   <div class="container">
     <div class="cta-banner">
-      <i class="fas fa-phone-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+      <i class="fas fa-phone" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
       <h2 class="font-heading" style="font-size: 2rem;">Emergency Brake Service? <span class="text-accent">Call Now</span></h2>
       <p style="margin: 1rem 0; color: var(--text-secondary);">24/7 roadside assistance. Free estimate over the phone. Mobile service arrives within 2 hours.</p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="tel:+18885552753" class="btn-primary"><i class="fas fa-phone-alt"></i> (888) 555-2753</a>
+        <a href="tel:+18885552753" class="btn-primary"><i class="fas fa-phone"></i> (888) 555-2753</a>
         <a href="contact.html" class="btn-outline"><i class="fas fa-envelope"></i> Contact Us</a>
       </div>
     </div>
@@ -796,7 +996,7 @@
       <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
       <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
       <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
-      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
     </div>
     <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
   </div>

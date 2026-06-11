@@ -297,6 +297,20 @@
       box-shadow: 0 4px 15px rgba(255,212,40,0.2);
     }
     .login-btn:hover { background: #E0B800; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,212,40,0.4); }
+    .login-btn-secondary {
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.6rem 1.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: 0.3s;
+      white-space: nowrap;
+      font-family: 'Oswald', sans-serif;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    .login-btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     
     @media (max-width: 1180px) {
       .navbar {
@@ -390,6 +404,18 @@
       color: #000000;
       padding: 0.75rem 1.5rem;
       border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      text-align: center;
+    }
+    .mobile-login-btn-secondary {
+      display: inline-block;
+      margin: 1rem 1.5rem;
+      background: transparent;
+      color: var(--nav-text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.2);
       text-decoration: none;
       font-weight: 700;
       text-align: center;
@@ -659,9 +685,9 @@
       display: flex;
       gap: 12px;
       margin-bottom: 12px;
-      align-items: flex-start;
+      align-items: center;
     }
-    .footer-contact-item i { color: var(--accent); margin-top: 2px; min-width: 18px; }
+    .footer-contact-item i { color: var(--accent); min-width: 18px; text-align: center; }
     .footer-contact-item span, .footer-contact-item a { color: var(--footer-text-muted); text-decoration: none; font-size: 0.85rem; }
     .footer-copyright {
       border-top: 1px solid rgba(255,212,40,0.2);
@@ -708,7 +734,7 @@
         </div>
       </div>
       <div class="nav-buttons">
-        <a href="login.html" class="login-btn">Sign In</a>
+        <a href="login.html" class="login-btn-secondary">Sign In</a>
         <a href="register.html" class="login-btn">Sign up</a>
         <button id="rtl-toggle" class="icon-btn" title="RTL"><i class="fas fa-exchange-alt"></i></button>
         <button id="theme-toggle" class="icon-btn" title="Theme"><i class="fas fa-moon"></i></button>
@@ -735,7 +761,7 @@
         <button class="mobile-dropdown-btn">Dashboard <i class="fas fa-chevron-down mobile-dropdown-icon"></i></button>
         <div class="mobile-submenu"><a href="admin.html">Admin Dashboard</a><a href="client.html">Client Dashboard</a></div>
       </div>
-      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn">Sign In</a></div>
+      <div class="mobile-nav-item"><a href="login.html" class="mobile-login-btn-secondary">Sign In</a></div>
       <div class="mobile-nav-item"><a href="register.html" class="mobile-login-btn">Sign up</a></div>
       <div class="mobile-theme-rtl">
         <button id="mobile-theme-toggle" class="mobile-icon-btn"><i class="fas fa-moon"></i> Theme</button>
@@ -749,7 +775,7 @@
 <div class="page-header" style="
   position: relative;
   background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.78)),
-  url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  url('https://images.unsplash.com/photo-1619642751034-765dfdf7c162?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
   padding: 120px 20px;
   text-align: center;
   overflow: hidden;
@@ -804,13 +830,9 @@
         display:flex;
         flex-direction:column;
         height:100%;
-        background:#fff;
-        border-radius:20px;
-        overflow:hidden;
-        box-shadow:0 10px 30px rgba(0,0,0,0.08);
       ">
 
-        <img src="images/ho2.webp" alt="Brake pad replacement service" class="service-img" style="
+        <img src="https://images.unsplash.com/photo-1504222490345-c075b6008014?w=1400&auto=format&fit=crop&q=80" alt="Brake pad replacement service" class="service-img" style="
           width:100%;
           height:230px;
           object-fit:cover;
@@ -862,13 +884,9 @@
         display:flex;
         flex-direction:column;
         height:100%;
-        background:#fff;
-        border-radius:20px;
-        overflow:hidden;
-        box-shadow:0 10px 30px rgba(0,0,0,0.08);
       ">
 
-        <img src="images/s1.webp" alt="Rotor replacement service" class="service-img" style="
+        <img src="images/ho2.webp" alt="Rotor replacement service" class="service-img" style="
           width:100%;
           height:230px;
           object-fit:cover;
@@ -920,10 +938,6 @@
         display:flex;
         flex-direction:column;
         height:100%;
-        background:#fff;
-        border-radius:20px;
-        overflow:hidden;
-        box-shadow:0 10px 30px rgba(0,0,0,0.08);
       ">
 
         <img src="images/s2.webp" alt="Brake caliper repair" class="service-img" style="
@@ -992,7 +1006,7 @@
     
     <!-- HD Image Banner -->
     <div style="margin-top: 3rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md);">
-      <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&auto=format" alt="BrakeMaster mobile service van on road" style="width: 100%; height: auto; display: block;">
+      <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=1200&auto=format" alt="BrakeMaster mobile service van on road" style="width: 100%; height: auto; display: block;">
     </div>
   </div>
 </section>
@@ -1010,8 +1024,8 @@
     </div>
     
     <!-- Process HD Image -->
-    <div style="margin-top: 3rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md);">
-      <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200&auto=format" alt="Mechanic working on brake repair" style="width: 100%; height: auto; display: block;">
+    <div style="margin-top: 2rem; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-md);">
+      <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=1200&auto=format" alt="Mechanic working on brake repair" style="width: 100%; height: auto; display: block;">
     </div>
   </div>
 </section>
@@ -1041,7 +1055,7 @@
       <div class="footer-col"><a href="index.html" class="footer-logo"><span>BRAKE MASTER</a><p>Professional mobile brake repair and rotor replacement. Certified technicians, transparent pricing.</p><div class="social-icons"><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
       <div class="footer-col"><h4>Services</h4><a href="#">Brake Pad Replacement</a><a href="#">Rotor Replacement</a><a href="#">Caliper Repair</a><a href="#">Brake Fluid Flush</a></div>
       <div class="footer-col"><h4>Support</h4><a href="#">Schedule Appointment</a><a href="#">Warranty Info</a><a href="#">Financing Options</a><a href="#">Blog & Tips</a></div>
-      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone-alt"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
+      <div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Serving Nationwide</span></div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+18885552753">+1 (888) 555-2753</a></div><div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:help@brakemaster.com">help@brakemaster.com</a></div></div>
     </div>
     <div class="footer-copyright"><p>© 2026 BrakeMaster — Mobile Brake Repair Experts. All rights reserved.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div></div>
   </div>
